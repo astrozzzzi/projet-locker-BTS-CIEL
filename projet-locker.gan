@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?><project name="Untitled Gantt Project" company="" webLink="http://" view-date="2026-02-23" view-index="0" gantt-divider-location="300" resource-divider-location="300" version="2.8.9" locale="fr">
+    <description/>
+    <view zooming-state="default:5" id="gantt-chart">
+        <field id="tpd3" name="Nom" width="167" order="0"/>
+        <field id="tpd4" name="Date de début" width="65" order="1"/>
+        <field id="tpd5" name="Date de fin" width="64" order="2"/>
+        <timeline><![CDATA[1,12]]></timeline>
+        <option id="color.recent"><![CDATA[#ff0033 #ffcccc #ff0000 #ff3333 #00cc00 #ffcc33]]></option>
+    </view>
+    <view id="resource-table">
+        <field id="0" name="Nom" width="210" order="0"/>
+        <field id="1" name="Rôle par défaut" width="86" order="1"/>
+    </view>
+    <!-- -->
+    <calendars base-id="Aucun">
+        <day-types>
+            <day-type id="0"/>
+            <day-type id="1"/>
+            <default-week id="1" name="default" sun="1" mon="0" tue="0" wed="0" thu="0" fri="0" sat="1"/>
+            <only-show-weekends value="true"/>
+            <overriden-day-types/>
+            <days/>
+        </day-types>
+        <date year="2026" month="5" date="1" type="HOLIDAY" color="#ffcccc"><![CDATA[Fête du travail]]></date>
+        <date year="2026" month="5" date="8" type="HOLIDAY" color="#ffcccc"><![CDATA[Victoire 1945]]></date>
+        <date year="2026" month="5" date="14" type="HOLIDAY" color="#ffcccc"><![CDATA[Ascension]]></date>
+        <date year="2026" month="5" date="24" type="HOLIDAY" color="#ffcccc"><![CDATA[Pentecôte]]></date>
+        <date year="2026" month="5" date="25" type="HOLIDAY" color="#ffcccc"><![CDATA[Pentecôte]]></date>
+        <date year="2026" month="5" date="15" type="HOLIDAY" color="#ffcccc"><![CDATA[Ascension]]></date>
+        <date year="2026" month="5" date="16" type="HOLIDAY" color="#ffcccc"><![CDATA[Ascension]]></date>
+        <date year="2026" month="5" date="17" type="HOLIDAY" color="#ffcccc"><![CDATA[Ascension]]></date>
+    </calendars>
+    <tasks empty-milestones="true">
+        <taskproperties>
+            <taskproperty id="tpd0" name="type" type="default" valuetype="icon"/>
+            <taskproperty id="tpd1" name="priority" type="default" valuetype="icon"/>
+            <taskproperty id="tpd2" name="info" type="default" valuetype="icon"/>
+            <taskproperty id="tpd3" name="name" type="default" valuetype="text"/>
+            <taskproperty id="tpd4" name="begindate" type="default" valuetype="date"/>
+            <taskproperty id="tpd5" name="enddate" type="default" valuetype="date"/>
+            <taskproperty id="tpd6" name="duration" type="default" valuetype="int"/>
+            <taskproperty id="tpd7" name="completion" type="default" valuetype="int"/>
+            <taskproperty id="tpd8" name="coordinator" type="default" valuetype="text"/>
+            <taskproperty id="tpd9" name="predecessorsr" type="default" valuetype="text"/>
+        </taskproperties>
+        <task id="1" name="VACANCES D'HIVER" color="#ff3333" shape="1,1,0,0,0,1,1,0,0,0,1,1,1,0,0,1" meeting="false" start="2026-02-08" duration="15" complete="0" thirdDate="2026-02-16" thirdDate-constraint="0" priority="4" expand="true"/>
+        <task id="12" name="VACANCES DE PRINTEMPS" color="#ff0000" shape="1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1" meeting="false" start="2026-04-06" duration="15" complete="0" thirdDate="2026-02-04" thirdDate-constraint="0" expand="true"/>
+        <task id="18" name="Diagramme (TOUS LES ETUDIANTS)" color="#8cb6ce" meeting="false" start="2026-01-05" duration="49" complete="0" thirdDate="2026-02-04" thirdDate-constraint="0" expand="true"/>
+        <task id="22" name="Développement(TOUS LES ETUDIANTS)" color="#8cb6ce" meeting="false" start="2026-04-01" duration="30" complete="0" thirdDate="2025-12-01" thirdDate-constraint="0" expand="true"/>
+        <task id="28" name="Tests unitaires et d'intégration (TOUS LES ETUDIANTS)" color="#8cb6ce" meeting="false" start="2026-05-19" duration="15" complete="0" thirdDate="2025-12-01" thirdDate-constraint="0" expand="true"/>
+        <task id="34" name="FIN DU PROJET" color="#8cb6ce" meeting="false" start="2026-06-30" duration="1" complete="0" thirdDate="2026-06-15" thirdDate-constraint="0" expand="true"/>
+    </tasks>
+    <resources>
+        <resource id="0" name="" function="Default:0" contacts="" phone=""/>
+    </resources>
+    <allocations/>
+    <vacations>
+        <vacation start="2026-02-08" end="2026-02-23" resourceid="0"/>
+    </vacations>
+    <previous/>
+    <roles roleset-name="Default"/>
+    <roles roleset-name="SoftwareDevelopment"/>
+</project>
