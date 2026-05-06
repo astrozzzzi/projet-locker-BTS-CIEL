@@ -53,7 +53,7 @@ function addColis()
 
     if(mysqli_query($conn, $query))
     {
-        $response = ["status" => 1, "message" => "Colis ajoutÃ©"];
+        $response = ["status" => 1, "message" => "Colis ajouté"];
     }
     else
     {
@@ -85,7 +85,7 @@ function updateColis($id)
 
     if(mysqli_query($conn, $query))
     {
-        $response = ["status" => 1, "message" => "Colis modifiÃ©"];
+        $response = ["status" => 1, "message" => "Colis modifié"];
     }
     else
     {
@@ -104,7 +104,7 @@ function deleteColis($id)
 
     if(mysqli_query($conn, $query))
     {
-        $response = ["status" => 1, "message" => "Colis supprimÃ©"];
+        $response = ["status" => 1, "message" => "Colis supprimé"];
     }
     else
     {
