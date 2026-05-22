@@ -1,18 +1,18 @@
 <?php
 
-$host = "172.18.199.9"; 
+$host = "172.18.199.9";
 $user = "anas";
 $password = "jesuisgentil42";
-$dbname = "test";
+$dbname = "bddLocker";
+$port = 3307;
 
-// 🔗 connexion
-$conn = mysqli_connect($host, $user, $password, $dbname);
+$conn = mysqli_connect($host, $user, $password, $dbname, $port);
 
-// ❌ si erreur
-if (!$conn) {
+if (!$conn)
+{
     die(json_encode([
         "success" => false,
-        "message" => "Erreur connexion BDD: " . mysqli_connect_error()
+        "message" => "Erreur connexion BDD : " . mysqli_connect_error()
     ]));
 }
 

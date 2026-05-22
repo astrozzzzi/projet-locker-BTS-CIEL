@@ -1,6 +1,8 @@
 <?php
 
 header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Headers: Content-Type");
+header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
 header("Content-Type: application/json");
 
 include("db_connect.php");
@@ -8,24 +10,34 @@ include("db_connect.php");
 $request_method = $_SERVER["REQUEST_METHOD"];
 $data = json_decode(file_get_contents("php://input"), true);
 
-/* ===================== GET USERS ===================== */
+// ===================== GET USERS =====================
 function getUsers()
 {
     global $conn;
 
-    $query = "SELECT id, nom, prenom, email, telephone FROM users";
+    $query = "
+    SELECT 
+    idClients,
+    nom,
+    prenom,
+    email,
+    telephone
+    FROM Clients
+    ";
+
     $result = mysqli_query($conn, $query);
 
-    $users = array();
+    $users = [];
 
-    while ($row = mysqli_fetch_assoc($result)) {
+    while($row = mysqli_fetch_assoc($result))
+    {
         $users[] = $row;
     }
 
-    echo json_encode($users, JSON_PRETTY_PRINT);
+    echo json_encode($users);
 }
 
-/* ===================== REGISTER ===================== */
+// ===================== REGISTER =====================
 function addUser($data)
 {
     global $conn;
@@ -36,18 +48,75 @@ function addUser($data)
     $telephone = $data["telephone"];
     $password = $data["password"];
 
-    // ⚠️ Version simple (à sécuriser après)
-    $query = "INSERT INTO users (nom, prenom, email, telephone, password) 
-              VALUES ('$nom','$prenom','$email','$telephone','$password')";
+    // Vérifie email déjà utilisé
+    $check = "
+    SELECT idClients 
+    FROM Clients 
+    WHERE email='$email'
+    LIMIT 1
+    ";
 
-    if (mysqli_query($conn, $query)) {
-        echo json_encode(["success" => true, "message" => "Compte créé"]);
-    } else {
-        echo json_encode(["success" => false, "message" => mysqli_error($conn)]);
+    $result = mysqli_query($conn, $check);
+
+    if(mysqli_num_rows($result) > 0)
+    {
+        echo json_encode([
+            "success" => false,
+            "message" => "Email déjà utilisé"
+        ]);
+
+        return;
+    }
+
+    // Génère ID auto
+    $idQuery = "SELECT MAX(idClients) as maxId FROM Clients";
+
+    $idResult = mysqli_query($conn, $idQuery);
+
+    $row = mysqli_fetch_assoc($idResult);
+
+    $newId = $row["maxId"] + 1;
+
+    // Insert user
+    $query = "
+    INSERT INTO Clients
+    (
+        idClients,
+        nom,
+        prenom,
+        telephone,
+        mdp,
+        email
+    )
+
+    VALUES
+    (
+        '$newId',
+        '$nom',
+        '$prenom',
+        '$telephone',
+        '$password',
+        '$email'
+    )
+    ";
+
+    if(mysqli_query($conn, $query))
+    {
+        echo json_encode([
+            "success" => true,
+            "message" => "Compte créé"
+        ]);
+    }
+    else
+    {
+        echo json_encode([
+            "success" => false,
+            "message" => mysqli_error($conn)
+        ]);
     }
 }
 
-/* ===================== LOGIN ===================== */
+// ===================== LOGIN CLIENT =====================
 function loginUser($data)
 {
     global $conn;
@@ -55,54 +124,180 @@ function loginUser($data)
     $email = $data["email"];
     $password = $data["password"];
 
-    $query = "SELECT * FROM users WHERE email='$email' LIMIT 1";
+    $query = "
+    SELECT *
+    FROM Clients
+    WHERE email='$email'
+    LIMIT 1
+    ";
+
     $result = mysqli_query($conn, $query);
 
-    if ($user = mysqli_fetch_assoc($result)) {
-
-        if ($user["password"] === $password) {
+    if($user = mysqli_fetch_assoc($result))
+    {
+        if($user["mdp"] === $password)
+        {
             echo json_encode([
                 "success" => true,
-                "message" => "Connexion réussie",
+                "role" => "client",
+
                 "user" => [
-                    "id" => $user["id"],
+                    "id" => $user["idClients"],
                     "nom" => $user["nom"],
                     "prenom" => $user["prenom"],
-                    "email" => $user["email"]
+                    "email" => $user["email"],
+                    "telephone" => $user["telephone"]
                 ]
             ]);
-        } else {
+        }
+        else
+        {
             echo json_encode([
                 "success" => false,
                 "message" => "Mot de passe incorrect"
             ]);
         }
-
-    } else {
+    }
+    else
+    {
         echo json_encode([
             "success" => false,
-            "message" => "Utilisateur non trouvé"
+            "message" => "Utilisateur introuvable"
         ]);
     }
 }
 
-/* ===================== ROUTER ===================== */
+// ===================== LOGIN LIVREUR =====================
+function loginLivreur($data)
+{
+    global $conn;
+
+    $email = $data["email"];
+    $password = $data["password"];
+
+    $query = "
+    SELECT *
+    FROM Livreur
+    WHERE email='$email'
+    LIMIT 1
+    ";
+
+    $result = mysqli_query($conn, $query);
+
+    if($livreur = mysqli_fetch_assoc($result))
+    {
+        if($livreur["mdp"] === $password)
+        {
+            echo json_encode([
+                "success" => true,
+                "role" => "livreur",
+
+                "livreur" => [
+                    "id" => $livreur["idLivreur"],
+                    "nom" => $livreur["nom"],
+                    "prenom" => $livreur["prenom"],
+                    "telephone" => $livreur["telephone"],
+                    "email" => $livreur["email"],
+                    "disponibilite" => $livreur["disponibilite"]
+                ]
+            ]);
+        }
+        else
+        {
+            echo json_encode([
+                "success" => false,
+                "message" => "Mot de passe incorrect"
+            ]);
+        }
+    }
+    else
+    {
+        echo json_encode([
+            "success" => false,
+            "message" => "Livreur introuvable"
+        ]);
+    }
+}
+
+// ===================== UPDATE DISPONIBILITE =====================
+function updateDisponibilite($data)
+{
+    global $conn;
+
+    $id = $data["idLivreur"];
+    $dispo = $data["disponibilite"];
+
+    $query = "
+    UPDATE Livreur
+    SET disponibilite='$dispo'
+    WHERE idLivreur='$id'
+    ";
+
+    if(mysqli_query($conn, $query))
+    {
+        echo json_encode([
+            "success" => true,
+            "message" => "Disponibilité mise à jour"
+        ]);
+    }
+    else
+    {
+        echo json_encode([
+            "success" => false,
+            "message" => mysqli_error($conn)
+        ]);
+    }
+}
+
+// ===================== ROUTER =====================
 switch($request_method)
 {
     case 'GET':
+
         getUsers();
+
         break;
 
     case 'POST':
-        if (isset($data["action"]) && $data["action"] === "login") {
-            loginUser($data);
-        } else {
+
+        if(isset($data["action"]))
+        {
+            if($data["action"] === "login")
+            {
+                loginUser($data);
+            }
+
+            else if($data["action"] === "loginLivreur")
+            {
+                loginLivreur($data);
+            }
+
+            else if($data["action"] === "updateDisponibilite")
+            {
+                updateDisponibilite($data);
+            }
+
+            else
+            {
+                addUser($data);
+            }
+        }
+        else
+        {
             addUser($data);
         }
+
         break;
 
     default:
-        header("HTTP/1.0 405 Method Not Allowed");
+
+        http_response_code(405);
+
+        echo json_encode([
+            "message" => "Méthode non autorisée"
+        ]);
+
         break;
 }
+
 ?>
