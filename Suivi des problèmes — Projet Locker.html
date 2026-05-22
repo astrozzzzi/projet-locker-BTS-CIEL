@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<!-- saved from url=(0062)file:///C:/Users/Administrateur/Downloads/suivi-problemes.html -->
+<html lang="fr"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Suivi des problèmes — Projet Locker</title>
+<link href="./Suivi des problèmes — Projet Locker_files/css2" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #F7F5F0;
+    --surface: #FFFFFF;
+    --surface2: #F0EDE6;
+    --border: #E0DBD0;
+    --border2: #C8C0B0;
+    --text: #1A1714;
+    --text2: #6B6358;
+    --text3: #A39B8E;
+    --accent: #2C4A3E;
+    --accent-light: #E8F0EC;
+
+    --amber-bg: #FDF3E3; --amber-text: #7A4A0A; --amber-border: #F0C878;
+    --blue-bg: #E8F0FA;  --blue-text: #1A3D6B;  --blue-border: #90B4E0;
+    --green-bg: #E8F4EC; --green-text: #1B4D2C;  --green-border: #7DC49A;
+    --red-bg: #FAEBE8;   --red-text: #6B1E18;    --red-border: #E09088;
+  }
+
+  html { font-size: 16px; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 0;
+  }
+
+  /* HEADER */
+  .header {
+    background: var(--accent);
+    padding: 2.5rem 3rem 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    right: -60px; top: -60px;
+    width: 300px; height: 300px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.04);
+  }
+  .header::after {
+    content: '';
+    position: absolute;
+    right: 80px; bottom: -80px;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.03);
+  }
+  .header-inner { position: relative; z-index: 1; max-width: 960px; margin: 0 auto; }
+  .project-label {
+    font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+    color: rgba(255,255,255,0.5); margin-bottom: 10px;
+  }
+  .header h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2.2rem; font-weight: 400; color: #fff; line-height: 1.15;
+    margin-bottom: 1.5rem;
+  }
+  .stats-row { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+  .stat {
+    display: flex; align-items: center; gap: 8px;
+    background: rgba(255,255,255,0.1); border-radius: 8px;
+    padding: 8px 14px;
+  }
+  .stat-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .stat-label { font-size: 12px; color: rgba(255,255,255,0.65); }
+  .stat-count { font-size: 14px; font-weight: 600; color: #fff; margin-left: 4px; }
+
+  /* MAIN */
+  .main { max-width: 960px; margin: 0 auto; padding: 2rem 3rem 4rem; }
+
+  /* TOOLBAR */
+  .toolbar {
+    display: flex; align-items: center; gap: 8px;
+    margin-bottom: 1.5rem; flex-wrap: wrap;
+  }
+  .filter-group { display: flex; gap: 4px; flex-wrap: wrap; }
+  .filter-btn {
+    font-size: 12px; font-weight: 500; padding: 6px 14px;
+    border-radius: 20px; border: 1.5px solid var(--border);
+    background: var(--surface); color: var(--text2); cursor: pointer;
+    transition: all 0.15s; font-family: 'DM Sans', sans-serif;
+  }
+  .filter-btn:hover { border-color: var(--border2); color: var(--text); }
+  .filter-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .spacer { flex: 1; }
+  .add-btn {
+    display: flex; align-items: center; gap: 6px;
+    font-size: 13px; font-weight: 500; padding: 8px 18px;
+    border-radius: 8px; border: none;
+    background: var(--accent); color: #fff; cursor: pointer;
+    font-family: 'DM Sans', sans-serif; transition: opacity 0.15s;
+  }
+  .add-btn:hover { opacity: 0.88; }
+  .add-btn svg { width: 15px; height: 15px; }
+
+  /* CATEGORY SECTIONS */
+  .section { margin-bottom: 2rem; }
+  .section-title {
+    font-size: 11px; font-weight: 600; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--text3);
+    margin-bottom: 0.75rem; padding-left: 4px;
+  }
+  .cards-grid { display: flex; flex-direction: column; gap: 8px; }
+
+  /* CARD */
+  .card {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 18px;
+    transition: border-color 0.15s, box-shadow 0.15s;
+    animation: fadeIn 0.25s ease;
+  }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+  .card:hover { border-color: var(--border2); box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .card-header { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 10px; }
+  .card-icon {
+    width: 34px; height: 34px; border-radius: 8px; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center; font-size: 16px;
+    background: var(--surface2);
+  }
+  .card-main { flex: 1; min-width: 0; }
+  .card-title-row { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; }
+  .card-title {
+    font-size: 14px; font-weight: 500; color: var(--text); flex: 1;
+    border: 1.5px solid transparent; border-radius: 6px;
+    padding: 3px 6px; margin: -3px -6px;
+    transition: border-color 0.15s; cursor: text;
+    font-family: 'DM Sans', sans-serif; background: transparent;
+  }
+  .card-title:hover { border-color: var(--border); }
+  .card-title:focus { outline: none; border-color: var(--accent); background: var(--accent-light); }
+  .status-pill {
+    font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 20px;
+    border: 1.5px solid; cursor: pointer; white-space: nowrap; flex-shrink: 0;
+    font-family: 'DM Sans', sans-serif; appearance: none; -webkit-appearance: none;
+  }
+  .s-reflexion { background: var(--amber-bg); color: var(--amber-text); border-color: var(--amber-border); }
+  .s-en-cours  { background: var(--blue-bg);  color: var(--blue-text);  border-color: var(--blue-border); }
+  .s-resolu    { background: var(--green-bg); color: var(--green-text); border-color: var(--green-border); }
+  .s-bloque    { background: var(--red-bg);   color: var(--red-text);   border-color: var(--red-border); }
+  .tag-chip {
+    font-size: 11px; padding: 2px 9px; border-radius: 20px;
+    background: var(--surface2); color: var(--text2); border: 1px solid var(--border); white-space: nowrap;
+  }
+  .del-btn {
+    width: 28px; height: 28px; border-radius: 6px; border: none; background: none;
+    cursor: pointer; display: flex; align-items: center; justify-content: center;
+    color: var(--text3); transition: all 0.15s; flex-shrink: 0;
+  }
+  .del-btn:hover { background: var(--red-bg); color: var(--red-text); }
+  .note-area {
+    width: 100%; font-size: 13px; line-height: 1.6; padding: 10px 12px;
+    border: 1.5px solid var(--border); border-radius: 8px;
+    background: var(--surface2); color: var(--text);
+    font-family: 'DM Sans', sans-serif; resize: vertical; min-height: 60px;
+    transition: border-color 0.15s;
+  }
+  .note-area::placeholder { color: var(--text3); }
+  .note-area:focus { outline: none; border-color: var(--accent); background: var(--accent-light); }
+
+  /* EMPTY */
+  .empty {
+    text-align: center; padding: 3rem 1rem;
+    color: var(--text3); font-size: 14px;
+  }
+
+  /* MODAL */
+  .modal-backdrop {
+    display: none; position: fixed; inset: 0;
+    background: rgba(20,18,14,0.5); z-index: 100;
+    align-items: center; justify-content: center;
+    backdrop-filter: blur(3px);
+  }
+  .modal-backdrop.open { display: flex; }
+  .modal {
+    background: var(--surface); border-radius: 16px;
+    padding: 28px 28px 24px; width: 420px; max-width: 95vw;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+    animation: modalIn 0.2s ease;
+  }
+  @keyframes modalIn { from { opacity: 0; transform: scale(0.95) translateY(8px); } to { opacity: 1; transform: none; } }
+  .modal-title {
+    font-family: 'DM Serif Display', serif; font-size: 1.3rem;
+    color: var(--text); margin-bottom: 20px;
+  }
+  .form-group { margin-bottom: 14px; }
+  .form-label { font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text2); display: block; margin-bottom: 6px; }
+  .form-input, .form-select, .form-textarea {
+    width: 100%; font-size: 13px; padding: 10px 12px;
+    border: 1.5px solid var(--border); border-radius: 8px;
+    background: var(--surface); color: var(--text);
+    font-family: 'DM Sans', sans-serif; transition: border-color 0.15s;
+  }
+  .form-input:focus, .form-select:focus, .form-textarea:focus {
+    outline: none; border-color: var(--accent); background: var(--accent-light);
+  }
+  .form-textarea { resize: vertical; min-height: 80px; }
+  .modal-actions { display: flex; justify-content: flex-end; gap: 8px; margin-top: 20px; }
+  .btn-cancel {
+    font-size: 13px; font-weight: 500; padding: 9px 18px; border-radius: 8px;
+    border: 1.5px solid var(--border); background: var(--surface); color: var(--text2);
+    cursor: pointer; font-family: 'DM Sans', sans-serif; transition: all 0.15s;
+  }
+  .btn-cancel:hover { border-color: var(--border2); color: var(--text); }
+  .btn-confirm {
+    font-size: 13px; font-weight: 600; padding: 9px 20px; border-radius: 8px;
+    border: none; background: var(--accent); color: #fff;
+    cursor: pointer; font-family: 'DM Sans', sans-serif; transition: opacity 0.15s;
+  }
+  .btn-confirm:hover { opacity: 0.88; }
+
+  @media (max-width: 600px) {
+    .header { padding: 1.5rem; }
+    .header h1 { font-size: 1.6rem; }
+    .main { padding: 1.5rem 1rem 3rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-inner">
+    <p class="project-label">Projet Locker — Tableau de bord</p>
+    <h1>Suivi des problèmes</h1>
+    <div class="stats-row" id="stats-row"><div class="stat"><span class="stat-dot" style="background:#E8A020"></span><span class="stat-label">À réfléchir</span><span class="stat-count">10</span></div><div class="stat"><span class="stat-dot" style="background:#3A7FD4"></span><span class="stat-label">En cours</span><span class="stat-count">0</span></div><div class="stat"><span class="stat-dot" style="background:#3A9456"></span><span class="stat-label">Résolu</span><span class="stat-count">1</span></div><div class="stat"><span class="stat-dot" style="background:#D44A44"></span><span class="stat-label">Bloqué</span><span class="stat-count">0</span></div></div>
+  </div>
+</div>
+
+<div class="main">
+  <div class="toolbar">
+    <div class="filter-group" id="filter-group">
+      <button class="filter-btn active" data-filter="all" onclick="setFilter(&#39;all&#39;)">Tous</button>
+      <button class="filter-btn" data-filter="reflexion" onclick="setFilter(&#39;reflexion&#39;)">À réfléchir</button>
+      <button class="filter-btn" data-filter="en-cours" onclick="setFilter(&#39;en-cours&#39;)">En cours</button>
+      <button class="filter-btn" data-filter="resolu" onclick="setFilter(&#39;resolu&#39;)">Résolu</button>
+      <button class="filter-btn" data-filter="bloque" onclick="setFilter(&#39;bloque&#39;)">Bloqué</button>
+    </div>
+    <div class="spacer"></div>
+    <button class="add-btn" onclick="openModal()">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <line x1="8" y1="3" x2="8" y2="13"></line><line x1="3" y1="8" x2="13" y2="8"></line>
+      </svg>
+      Ajouter un problème
+    </button>
+  </div>
+
+  <div id="list"><div class="section">
+      <p class="section-title">📦 Livraison</p>
+      <div class="cards-grid"><div class="card" id="card-1">
+    <div class="card-header">
+      <div class="card-icon">📦</div>
+      <div class="card-main">
+        <div class="card-title-row">
+          <div class="card-title" contenteditable="true" onblur="updateTitle(1,this)" spellcheck="false">Attribution du colis au livreur</div>
+          <select class="status-pill s-reflexion" onchange="updateStatus(1,this.value)">
+            <option value="reflexion" selected="">À réfléchir</option><option value="en-cours">En cours</option><option value="resolu">Résolu</option><option value="bloque">Bloqué</option>
+          </select>
+          <span class="tag-chip">Livraison</span>
+          <button class="del-btn" onclick="del(1)" title="Supprimer">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+              <path d="M3 4h10M6 4V3h4v1M5 4l1 9h4l1-9"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+    <textarea class="note-area" placeholder="Notes, pistes de solution, questions…" onblur="updateNote(1,this.value)"></textarea>
+  </div></div>
+    </div><div class="section">
+      <p class="section-title">👤 Client</p>
+      <div class="cards-grid"><div class="card" id="card-2">
+    <div class="card-header">
+      <div class="card-icon">👤</div>
+      <div class="card-main">
+        <div class="card-title-row">
+          <div class="card-title" contenteditable="true" onblur="updateTitle(2,this)" spellcheck="false">Récupération des infos client via QR code</div>
+          <select class="status-pill s-reflexion" onchange="updateStatus(2,this.value)">
+            <option value="reflexion" selected="">À réfléchir</option><option value="en-cours">En cours</option><option value="resolu">Résolu</option><option value="bloque">Bloqué</option>
+          </select>
+          <span class="tag-chip">Client</span>
+          <button class="del-btn" onclick="del(2)" title="Supprimer">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+              <path d="M3 4h10M6 4V3h4v1M5 4l1 9h4l1-9"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+    <textarea class="note-area" placeholder="Notes, pistes de solution, questions…" onblur="updateNote(2,this.value)"></textarea>
+  </div><div class="card" id="card-4">
+    <div class="card-header">
+      <div class="card-icon">👤</div>
+      <div class="card-main">
+        <div class="card-title-row">
+          <div class="card-title" contenteditable="true" onblur="updateTitle(4,this)" spellcheck="false">Séparation clients et entreprises</div>
+          <select class="status-pill s-reflexion" onchange="updateStatus(4,this.value)">
+            <option value="reflexion" selected="">À réfléchir</option><option value="en-cours">En cours</option><option value="resolu">Résolu</option><option value="bloque">Bloqué</option>
+          </select>
+          <span class="tag-chip">Client</span>
+          <button class="del-btn" onclick="del(4)" title="Supprimer">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+              <path d="M3 4h10M6 4V3h4v1M5 4l1 9h4l1-9"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+    <textarea class="note-area" placeholder="Notes, pistes de solution, questions…" onblur="updateNote(4,this.value)"></textarea>
+  </div><div class="card" id="card-5">
+    <div class="card-header">
+      <div class="card-icon">👤</div>
+      <div class="card-main">
+        <div class="card-title-row">
+          <div class="card-title" contenteditable="true" onblur="updateTitle(5,this)" spellcheck="false">Définition du destinataire</div>
+          <select class="status-pill s-reflexion" onchange="updateStatus(5,this.value)">
+            <option value="reflexion" selected="">À réfléchir</option><option value="en-cours">En cours</option><option value="resolu">Résolu</option><option value="bloque">Bloqué</option>
+          </select>
+          <span class="tag-chip">Client</span>
+          <button class="del-btn" onclick="del(5)" title="Supprimer">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+              <path d="M3 4h10M6 4V3h4v1M5 4l1 9h4l1-9"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+    <textarea class="note-area" placeholder="Notes, pistes de solution, questions…" onblur="updateNote(5,this.value)"></textarea>
+  </div></div>
+    </div><div class="section">
+      <p class="section-title">🚴 Livreur</p>
+      <div class="cards-grid"><div class="card" id="card-3">
+    <div class="card-header">
+      <div class="card-icon">🚴</div>
+      <div class="card-main">
+        <div class="card-title-row">
+          <div class="card-title" contenteditable="true" onblur="updateTitle(3,this)" spellcheck="false">Gestion de plusieurs livreurs</div>
+          <select class="status-pill s-reflexion" onchange="updateStatus(3,this.value)">
+            <option value="reflexion" selected="">À réfléchir</option><option value="en-cours">En cours</option><option value="resolu">Résolu</option><option value="bloque">Bloqué</option>
+          </select>
+          <span class="tag-chip">Livreur</span>
+          <button class="del-btn" onclick="del(3)" title="Supprimer">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+              <path d="M3 4h10M6 4V3h4v1M5 4l1 9h4l1-9"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+    <textarea class="note-area" placeholder="Notes, pistes de solution, questions…" onblur="updateNote(3,this.value)"></textarea>
+  </div><div class="card" id="card-10">
+    <div class="card-header">
+      <div class="card-icon">🚴</div>
+      <div class="card-main">
+        <div class="card-title-row">
+          <div class="card-title" contenteditable="true" onblur="updateTitle(10,this)" spellcheck="false">Vérifier si le livreur peut récupérer un colis</div>
+          <select class="status-pill s-reflexion" onchange="updateStatus(10,this.value)">
+            <option value="reflexion" selected="">À réfléchir</option><option value="en-cours">En cours</option><option value="resolu">Résolu</option><option value="bloque">Bloqué</option>
+          </select>
+          <span class="tag-chip">Livreur</span>
+          <button class="del-btn" onclick="del(10)" title="Supprimer">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+              <path d="M3 4h10M6 4V3h4v1M5 4l1 9h4l1-9"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+    <textarea class="note-area" placeholder="Notes, pistes de solution, questions…" onblur="updateNote(10,this.value)"></textarea>
+  </div><div class="card" id="card-11">
+    <div class="card-header">
+      <div class="card-icon">🚴</div>
+      <div class="card-main">
+        <div class="card-title-row">
+          <div class="card-title" contenteditable="true" onblur="updateTitle(11,this)" spellcheck="false">Disponibilité du livreur (agenda ou bouton)</div>
+          <select class="status-pill s-resolu" onchange="updateStatus(11,this.value)">
+            <option value="reflexion" selected="">À réfléchir</option><option value="en-cours">En cours</option><option value="resolu">Résolu</option><option value="bloque">Bloqué</option>
+          </select>
+          <span class="tag-chip">Livreur</span>
+          <button class="del-btn" onclick="del(11)" title="Supprimer">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+              <path d="M3 4h10M6 4V3h4v1M5 4l1 9h4l1-9"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+    <textarea class="note-area" placeholder="Notes, pistes de solution, questions…" onblur="updateNote(11,this.value)"></textarea>
+  </div></div>
+    </div><div class="section">
+      <p class="section-title">🔒 Locker</p>
+      <div class="cards-grid"><div class="card" id="card-6">
+    <div class="card-header">
+      <div class="card-icon">🔒</div>
+      <div class="card-main">
+        <div class="card-title-row">
+          <div class="card-title" contenteditable="true" onblur="updateTitle(6,this)" spellcheck="false">Identification du locker</div>
+          <select class="status-pill s-reflexion" onchange="updateStatus(6,this.value)">
+            <option value="reflexion" selected="">À réfléchir</option><option value="en-cours">En cours</option><option value="resolu">Résolu</option><option value="bloque">Bloqué</option>
+          </select>
+          <span class="tag-chip">Locker</span>
+          <button class="del-btn" onclick="del(6)" title="Supprimer">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+              <path d="M3 4h10M6 4V3h4v1M5 4l1 9h4l1-9"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+    <textarea class="note-area" placeholder="Notes, pistes de solution, questions…" onblur="updateNote(6,this.value)"></textarea>
+  </div><div class="card" id="card-7">
+    <div class="card-header">
+      <div class="card-icon">🔒</div>
+      <div class="card-main">
+        <div class="card-title-row">
+          <div class="card-title" contenteditable="true" onblur="updateTitle(7,this)" spellcheck="false">Choix de la case dans le locker</div>
+          <select class="status-pill s-reflexion" onchange="updateStatus(7,this.value)">
+            <option value="reflexion" selected="">À réfléchir</option><option value="en-cours">En cours</option><option value="resolu">Résolu</option><option value="bloque">Bloqué</option>
+          </select>
+          <span class="tag-chip">Locker</span>
+          <button class="del-btn" onclick="del(7)" title="Supprimer">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+              <path d="M3 4h10M6 4V3h4v1M5 4l1 9h4l1-9"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+    <textarea class="note-area" placeholder="Notes, pistes de solution, questions…" onblur="updateNote(7,this.value)"></textarea>
+  </div></div>
+    </div><div class="section">
+      <p class="section-title">💬 SMS</p>
+      <div class="cards-grid"><div class="card" id="card-8">
+    <div class="card-header">
+      <div class="card-icon">💬</div>
+      <div class="card-main">
+        <div class="card-title-row">
+          <div class="card-title" contenteditable="true" onblur="updateTitle(8,this)" spellcheck="false">SMS à envoyer à chaque client</div>
+          <select class="status-pill s-reflexion" onchange="updateStatus(8,this.value)">
+            <option value="reflexion" selected="">À réfléchir</option><option value="en-cours">En cours</option><option value="resolu">Résolu</option><option value="bloque">Bloqué</option>
+          </select>
+          <span class="tag-chip">SMS</span>
+          <button class="del-btn" onclick="del(8)" title="Supprimer">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+              <path d="M3 4h10M6 4V3h4v1M5 4l1 9h4l1-9"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+    <textarea class="note-area" placeholder="Notes, pistes de solution, questions…" onblur="updateNote(8,this.value)"></textarea>
+  </div></div>
+    </div><div class="section">
+      <p class="section-title">🗺️ Maps</p>
+      <div class="cards-grid"><div class="card" id="card-9">
+    <div class="card-header">
+      <div class="card-icon">🗺️</div>
+      <div class="card-main">
+        <div class="card-title-row">
+          <div class="card-title" contenteditable="true" onblur="updateTitle(9,this)" spellcheck="false">Utilisation de OpenStreetMaps</div>
+          <select class="status-pill s-reflexion" onchange="updateStatus(9,this.value)">
+            <option value="reflexion" selected="">À réfléchir</option><option value="en-cours">En cours</option><option value="resolu">Résolu</option><option value="bloque">Bloqué</option>
+          </select>
+          <span class="tag-chip">Maps</span>
+          <button class="del-btn" onclick="del(9)" title="Supprimer">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+              <path d="M3 4h10M6 4V3h4v1M5 4l1 9h4l1-9"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+    <textarea class="note-area" placeholder="Notes, pistes de solution, questions…" onblur="updateNote(9,this.value)"></textarea>
+  </div></div>
+    </div></div>
+</div>
+
+<!-- MODAL -->
+<div class="modal-backdrop" id="modal" onclick="bgClose(event)">
+  <div class="modal">
+    <p class="modal-title">Nouveau problème</p>
+    <div class="form-group">
+      <label class="form-label">Titre</label>
+      <input class="form-input" id="new-title" type="text" placeholder="Décrire le problème…">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Statut</label>
+      <select class="form-select" id="new-status">
+        <option value="reflexion">À réfléchir</option>
+        <option value="en-cours">En cours</option>
+        <option value="resolu">Résolu</option>
+        <option value="bloque">Bloqué</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Catégorie</label>
+      <input class="form-input" id="new-tag" type="text" placeholder="ex: Livraison, Locker, Client…">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Notes / Pistes</label>
+      <textarea class="form-textarea" id="new-note" placeholder="Idées, contraintes, questions…"></textarea>
+    </div>
+    <div class="modal-actions">
+      <button class="btn-cancel" onclick="closeModal()">Annuler</button>
+      <button class="btn-confirm" onclick="addProblem()">Ajouter</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const STATUS_LABEL = { reflexion:'À réfléchir', 'en-cours':'En cours', resolu:'Résolu', bloque:'Bloqué' };
+const STATUS_DOT   = { reflexion:'#E8A020', 'en-cours':'#3A7FD4', resolu:'#3A9456', bloque:'#D44A44' };
+const TAG_ICONS    = { Livraison:'📦', Locker:'🔒', Client:'👤', SMS:'💬', Maps:'🗺️', Livreur:'🚴' };
+
+const DEFAULT_PROBLEMS = [
+  { id:1,  title:'Attribution du colis au livreur',              status:'reflexion', tag:'Livraison', note:'' },
+  { id:2,  title:'Récupération des infos client via QR code',    status:'reflexion', tag:'Client',   note:'' },
+  { id:3,  title:'Gestion de plusieurs livreurs',                status:'reflexion', tag:'Livreur',  note:'' },
+  { id:4,  title:'Séparation clients et entreprises',            status:'reflexion', tag:'Client',   note:'' },
+  { id:5,  title:'Définition du destinataire',                   status:'reflexion', tag:'Client',   note:'' },
+  { id:6,  title:'Identification du locker',                     status:'reflexion', tag:'Locker',   note:'' },
+  { id:7,  title:'Choix de la case dans le locker',              status:'reflexion', tag:'Locker',   note:'' },
+  { id:8,  title:'SMS à envoyer à chaque client',                status:'reflexion', tag:'SMS',      note:'' },
+  { id:9,  title:'Utilisation de OpenStreetMaps',                status:'reflexion', tag:'Maps',     note:'' },
+  { id:10, title:'Vérifier si le livreur peut récupérer un colis', status:'reflexion', tag:'Livreur', note:'' },
+  { id:11, title:'Disponibilité du livreur (agenda ou bouton)', status:'reflexion', tag:'Livreur',  note:'' },
+];
+
+let problems = [];
+let nextId = 12;
+let currentFilter = 'all';
+
+function save() {
+  try { localStorage.setItem('locker_problems', JSON.stringify({problems, nextId})); } catch(e){}
+}
+function load() {
+  try {
+    const d = JSON.parse(localStorage.getItem('locker_problems') || 'null');
+    if (d) { problems = d.problems; nextId = d.nextId; } else { problems = JSON.parse(JSON.stringify(DEFAULT_PROBLEMS)); }
+  } catch(e) { problems = JSON.parse(JSON.stringify(DEFAULT_PROBLEMS)); }
+}
+
+function setFilter(f) {
+  currentFilter = f;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.toggle('active', b.dataset.filter === f));
+  render();
+}
+
+function tagIcon(tag) { return TAG_ICONS[tag] || '📌'; }
+
+function cardHTML(p) {
+  const ic = tagIcon(p.tag);
+  return `<div class="card" id="card-${p.id}">
+    <div class="card-header">
+      <div class="card-icon">${ic}</div>
+      <div class="card-main">
+        <div class="card-title-row">
+          <div class="card-title" contenteditable="true" onblur="updateTitle(${p.id},this)" spellcheck="false">${esc(p.title)}</div>
+          <select class="status-pill s-${p.status}" onchange="updateStatus(${p.id},this.value)">
+            ${Object.entries(STATUS_LABEL).map(([k,v])=>`<option value="${k}" ${p.status===k?'selected':''}>${v}</option>`).join('')}
+          </select>
+          ${p.tag?`<span class="tag-chip">${esc(p.tag)}</span>`:''}
+          <button class="del-btn" onclick="del(${p.id})" title="Supprimer">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+              <path d="M3 4h10M6 4V3h4v1M5 4l1 9h4l1-9"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+    <textarea class="note-area" placeholder="Notes, pistes de solution, questions…" onblur="updateNote(${p.id},this.value)">${esc(p.note)}</textarea>
+  </div>`;
+}
+
+function render() {
+  const filtered = currentFilter === 'all' ? problems : problems.filter(p => p.status === currentFilter);
+
+  // Stats
+  const counts = {};
+  Object.keys(STATUS_LABEL).forEach(k => counts[k] = problems.filter(p => p.status === k).length);
+  document.getElementById('stats-row').innerHTML = Object.entries(STATUS_LABEL).map(([k,v]) =>
+    `<div class="stat">
+      <span class="stat-dot" style="background:${STATUS_DOT[k]}"></span>
+      <span class="stat-label">${v}</span>
+      <span class="stat-count">${counts[k]}</span>
+    </div>`
+  ).join('');
+
+  if (!filtered.length) {
+    document.getElementById('list').innerHTML = '<div class="empty">Aucun problème dans cette catégorie.</div>';
+    return;
+  }
+
+  // Group by tag
+  const groups = {};
+  filtered.forEach(p => { const t = p.tag || 'Autre'; (groups[t] = groups[t]||[]).push(p); });
+  document.getElementById('list').innerHTML = Object.entries(groups).map(([tag, items]) =>
+    `<div class="section">
+      <p class="section-title">${tagIcon(tag)} ${esc(tag)}</p>
+      <div class="cards-grid">${items.map(cardHTML).join('')}</div>
+    </div>`
+  ).join('');
+}
+
+function esc(s) {
+  const d = document.createElement('div'); d.appendChild(document.createTextNode(s||'')); return d.innerHTML;
+}
+
+function updateTitle(id, el) {
+  const p = problems.find(x=>x.id===id); if(p) p.title = el.innerText.trim(); save();
+}
+function updateStatus(id, val) {
+  const p = problems.find(x=>x.id===id); if(p) p.status = val;
+  const sel = document.querySelector(`#card-${id} .status-pill`);
+  if(sel) { sel.className = `status-pill s-${val}`; }
+  document.getElementById('stats-row').innerHTML = (() => {
+    const counts = {};
+    Object.keys(STATUS_LABEL).forEach(k => counts[k] = problems.filter(p => p.status === k).length);
+    return Object.entries(STATUS_LABEL).map(([k,v]) =>
+      `<div class="stat"><span class="stat-dot" style="background:${STATUS_DOT[k]}"></span><span class="stat-label">${v}</span><span class="stat-count">${counts[k]}</span></div>`
+    ).join('');
+  })();
+  save();
+}
+function updateNote(id, val) {
+  const p = problems.find(x=>x.id===id); if(p) p.note = val; save();
+}
+function del(id) {
+  if(!confirm('Supprimer ce problème ?')) return;
+  problems = problems.filter(x=>x.id!==id); save(); render();
+}
+
+function openModal() {
+  document.getElementById('modal').classList.add('open');
+  document.getElementById('new-title').focus();
+}
+function closeModal() { document.getElementById('modal').classList.remove('open'); }
+function bgClose(e) { if(e.target === document.getElementById('modal')) closeModal(); }
+function addProblem() {
+  const title = document.getElementById('new-title').value.trim();
+  if(!title) { document.getElementById('new-title').focus(); return; }
+  problems.push({
+    id: nextId++,
+    title,
+    status: document.getElementById('new-status').value,
+    tag: document.getElementById('new-tag').value.trim() || 'Autre',
+    note: document.getElementById('new-note').value.trim()
+  });
+  document.getElementById('new-title').value = '';
+  document.getElementById('new-tag').value = '';
+  document.getElementById('new-note').value = '';
+  closeModal(); save(); render();
+}
+
+document.addEventListener('keydown', e => { if(e.key === 'Escape') closeModal(); });
+load(); render();
+</script>
+
+
+</body></html>
