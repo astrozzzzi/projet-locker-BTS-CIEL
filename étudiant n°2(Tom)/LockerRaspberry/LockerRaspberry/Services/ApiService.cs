@@ -1,46 +1,60 @@
-﻿using System;
-using System.Net.Http;
+﻿using System.Net.Http;
+using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace LockerControllerApp.Services
+namespace LockerRaspberry.Services
 {
     public class ApiService
     {
-        private readonly HttpClient _httpClient;
-        private readonly string _baseUrl = "http://172.18.199.9/colis.php";
+        private readonly HttpClient _httpClient = new HttpClient();
 
-        public ApiService()
+        private readonly string _baseUrl = "http://172.18.199.9/";
+
+        public async Task<string> LoginClientAsync(string email, string password)
         {
-            _httpClient = new HttpClient();
+            var data = new
+            {
+                action = "login",
+                email = email,
+                password = password
+            };
+
+            return await PostJsonAsync("user.php", data);
         }
 
-        public async Task<bool> VerifierColisAsync(string idColis)
+        public async Task<string> LoginLivreurAsync(string email, string password)
         {
-            try
+            var data = new
             {
-                string url = $"{_baseUrl}?id={idColis}";
-                string json = await _httpClient.GetStringAsync(url);
+                action = "loginLivreur",
+                email = email,
+                password = password
+            };
 
-                return !string.IsNullOrWhiteSpace(json) && json != "null";
-            }
-            catch (Exception)
-            {
-                return false;
-            }
+            return await PostJsonAsync("user.php", data);
         }
 
-        public async Task<string> LireColisAsync(string idColis)
+        public async Task<string> TrackColisAsync(string numeroColis)
         {
-            try
-            {
-                string url = $"{_baseUrl}?id={idColis}";
-                return await _httpClient.GetStringAsync(url);
-            }
-            catch (Exception ex)
-            {
-                return $"Erreur API : {ex.Message}";
-            }
+            return await _httpClient.GetStringAsync(
+                _baseUrl + "colis.php?track=" + numeroColis
+            );
+        }
+
+        private async Task<string> PostJsonAsync(string endpoint, object data)
+        {
+            string json = JsonSerializer.Serialize(data);
+
+            var content = new StringContent(
+                json,
+                Encoding.UTF8,
+                "application/json"
+            );
+
+            var response = await _httpClient.PostAsync(_baseUrl + endpoint, content);
+
+            return await response.Content.ReadAsStringAsync();
         }
     }
 }

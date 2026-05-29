@@ -32,19 +32,21 @@
             btnValiderCode = new Button();
             btnFermerCasier = new Button();
             txtCode = new TextBox();
+            labelConnexion = new Label();
+            label3 = new Label();
             SuspendLayout();
             // 
             // richTextBoxLogs
             // 
-            richTextBoxLogs.Location = new Point(260, 128);
+            richTextBoxLogs.Location = new Point(30, 324);
             richTextBoxLogs.Name = "richTextBoxLogs";
-            richTextBoxLogs.Size = new Size(278, 225);
+            richTextBoxLogs.Size = new Size(735, 78);
             richTextBoxLogs.TabIndex = 0;
             richTextBoxLogs.Text = "";
             // 
             // btnValiderCode
             // 
-            btnValiderCode.Location = new Point(260, 368);
+            btnValiderCode.Location = new Point(342, 147);
             btnValiderCode.Name = "btnValiderCode";
             btnValiderCode.Size = new Size(75, 23);
             btnValiderCode.TabIndex = 1;
@@ -53,7 +55,7 @@
             // 
             // btnFermerCasier
             // 
-            btnFermerCasier.Location = new Point(449, 368);
+            btnFermerCasier.Location = new Point(342, 195);
             btnFermerCasier.Name = "btnFermerCasier";
             btnFermerCasier.Size = new Size(75, 23);
             btnFermerCasier.TabIndex = 2;
@@ -62,16 +64,36 @@
             // 
             // txtCode
             // 
-            txtCode.Location = new Point(48, 38);
+            txtCode.Location = new Point(314, 104);
             txtCode.Name = "txtCode";
-            txtCode.Size = new Size(100, 23);
+            txtCode.Size = new Size(144, 23);
             txtCode.TabIndex = 3;
+            // 
+            // labelConnexion
+            // 
+            labelConnexion.AutoSize = true;
+            labelConnexion.Location = new Point(349, 20);
+            labelConnexion.Name = "labelConnexion";
+            labelConnexion.Size = new Size(64, 15);
+            labelConnexion.TabIndex = 4;
+            labelConnexion.Text = "Connexion";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(349, 86);
+            label3.Name = "label3";
+            label3.Size = new Size(68, 15);
+            label3.TabIndex = 7;
+            label3.Text = "Code colis :";
             // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(800, 427);
+            Controls.Add(label3);
+            Controls.Add(labelConnexion);
             Controls.Add(txtCode);
             Controls.Add(btnFermerCasier);
             Controls.Add(btnValiderCode);
@@ -88,5 +110,7 @@
         private Button btnValiderCode;
         private Button btnFermerCasier;
         private TextBox txtCode;
+        private Label labelConnexion;
+        private Label label3;
     }
 }

@@ -1,25 +1,23 @@
 ﻿using System;
 
-public class LockerController
+namespace LockerRaspberry.Controllers
 {
-    public event Action<string>? OnLog;
-
-    public void OuvrirCasier(int numeroCasier)
+    public class LockerController
     {
-        OnLog?.Invoke($"Ouverture du casier {numeroCasier}");
+        public void OuvrirCasier(int idCasier)
+        {
+            // Pour l’instant simulation
+            Console.WriteLine($"Ouverture du casier {idCasier}");
 
-        // Ici tu mettras plus tard le code GPIO Raspberry Pi
-        // Exemple : activer électro-aimant
+            // Plus tard : code GPIO Raspberry Pi ici
+        }
 
-        OnLog?.Invoke($"Casier {numeroCasier} ouvert");
-    }
+        public void FermerCasier(int idCasier)
+        {
+            // Pour l’instant simulation
+            Console.WriteLine($"Fermeture du casier {idCasier}");
 
-    public void FermerCasier(int numeroCasier)
-    {
-        OnLog?.Invoke($"Fermeture du casier {numeroCasier}");
-
-        // Ici tu mettras plus tard le code GPIO Raspberry Pi
-
-        OnLog?.Invoke($"Casier {numeroCasier} fermé");
+            // Plus tard : code GPIO Raspberry Pi ici
+        }
     }
 }
