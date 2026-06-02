@@ -46,7 +46,7 @@
             // 
             // btnValiderCode
             // 
-            btnValiderCode.Location = new Point(342, 147);
+            btnValiderCode.Location = new Point(363, 156);
             btnValiderCode.Name = "btnValiderCode";
             btnValiderCode.Size = new Size(75, 23);
             btnValiderCode.TabIndex = 1;
@@ -55,7 +55,7 @@
             // 
             // btnFermerCasier
             // 
-            btnFermerCasier.Location = new Point(342, 195);
+            btnFermerCasier.Location = new Point(363, 195);
             btnFermerCasier.Name = "btnFermerCasier";
             btnFermerCasier.Size = new Size(75, 23);
             btnFermerCasier.TabIndex = 2;
@@ -64,7 +64,7 @@
             // 
             // txtCode
             // 
-            txtCode.Location = new Point(314, 104);
+            txtCode.Location = new Point(330, 118);
             txtCode.Name = "txtCode";
             txtCode.Size = new Size(144, 23);
             txtCode.TabIndex = 3;
@@ -72,7 +72,7 @@
             // labelConnexion
             // 
             labelConnexion.AutoSize = true;
-            labelConnexion.Location = new Point(349, 20);
+            labelConnexion.Location = new Point(363, 20);
             labelConnexion.Name = "labelConnexion";
             labelConnexion.Size = new Size(64, 15);
             labelConnexion.TabIndex = 4;
@@ -81,7 +81,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(349, 86);
+            label3.Location = new Point(363, 87);
             label3.Name = "label3";
             label3.Size = new Size(68, 15);
             label3.TabIndex = 7;

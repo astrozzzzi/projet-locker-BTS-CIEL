@@ -1,60 +1,62 @@
-﻿using System.Net.Http;
-using System.Text;
+﻿using System;
+using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
+using LockerRaspberry.Models;
 
 namespace LockerRaspberry.Services
 {
     public class ApiService
     {
-        private readonly HttpClient _httpClient = new HttpClient();
+        private readonly HttpClient _httpClient;
 
         private readonly string _baseUrl = "http://172.18.199.9/";
 
-        public async Task<string> LoginClientAsync(string email, string password)
+        public ApiService()
         {
-            var data = new
+            _httpClient = new HttpClient();
+        }
+
+        public async Task<bool> TesterConnexionApiAsync()
+        {
+            try
             {
-                action = "login",
-                email = email,
-                password = password
-            };
+                string url = _baseUrl + "colis.php";
+                HttpResponseMessage response = await _httpClient.GetAsync(url);
 
-            return await PostJsonAsync("user.php", data);
-        }
-
-        public async Task<string> LoginLivreurAsync(string email, string password)
-        {
-            var data = new
+                return response.IsSuccessStatusCode;
+            }
+            catch
             {
-                action = "loginLivreur",
-                email = email,
-                password = password
-            };
-
-            return await PostJsonAsync("user.php", data);
+                return false;
+            }
         }
 
-        public async Task<string> TrackColisAsync(string numeroColis)
+        public async Task<Colis?> RechercherColisAsync(string numeroColis)
         {
-            return await _httpClient.GetStringAsync(
-                _baseUrl + "colis.php?track=" + numeroColis
-            );
-        }
+            try
+            {
+                string url = _baseUrl + "colis.php?track=" + numeroColis;
 
-        private async Task<string> PostJsonAsync(string endpoint, object data)
-        {
-            string json = JsonSerializer.Serialize(data);
+                string json = await _httpClient.GetStringAsync(url);
 
-            var content = new StringContent(
-                json,
-                Encoding.UTF8,
-                "application/json"
-            );
+                if (string.IsNullOrWhiteSpace(json))
+                    return null;
 
-            var response = await _httpClient.PostAsync(_baseUrl + endpoint, content);
+                Colis? colis = JsonSerializer.Deserialize<Colis>(json);
 
-            return await response.Content.ReadAsStringAsync();
+                if (colis == null)
+                    return null;
+
+                if (colis.Success == false)
+                    return null;
+
+                return colis;
+            }
+            catch
+            {
+                return null;
+            }
         }
     }
 }

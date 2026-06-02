@@ -6,18 +6,18 @@ namespace LockerRaspberry.Controllers
     {
         public void OuvrirCasier(int idCasier)
         {
-            // Pour l’instant simulation
-            Console.WriteLine($"Ouverture du casier {idCasier}");
-
+            // Simulation pour l’instant
             // Plus tard : code GPIO Raspberry Pi ici
+
+            Console.WriteLine($"Ouverture du casier {idCasier}");
         }
 
         public void FermerCasier(int idCasier)
         {
-            // Pour l’instant simulation
-            Console.WriteLine($"Fermeture du casier {idCasier}");
-
+            // Simulation pour l’instant
             // Plus tard : code GPIO Raspberry Pi ici
+
+            Console.WriteLine($"Fermeture du casier {idCasier}");
         }
     }
 }

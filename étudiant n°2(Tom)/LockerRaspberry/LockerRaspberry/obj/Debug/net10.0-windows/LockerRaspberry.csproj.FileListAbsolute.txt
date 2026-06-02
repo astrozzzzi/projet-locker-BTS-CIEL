@@ -1,0 +1,16 @@
+C:\Users\Administrateur\Desktop\projet-locker-BTS-CIEL-29-05-2026\étudiant n°2(Tom)\LockerRaspberry\LockerRaspberry\bin\Debug\net10.0-windows\LockerRaspberry.exe
+C:\Users\Administrateur\Desktop\projet-locker-BTS-CIEL-29-05-2026\étudiant n°2(Tom)\LockerRaspberry\LockerRaspberry\bin\Debug\net10.0-windows\LockerRaspberry.deps.json
+C:\Users\Administrateur\Desktop\projet-locker-BTS-CIEL-29-05-2026\étudiant n°2(Tom)\LockerRaspberry\LockerRaspberry\bin\Debug\net10.0-windows\LockerRaspberry.runtimeconfig.json
+C:\Users\Administrateur\Desktop\projet-locker-BTS-CIEL-29-05-2026\étudiant n°2(Tom)\LockerRaspberry\LockerRaspberry\bin\Debug\net10.0-windows\LockerRaspberry.dll
+C:\Users\Administrateur\Desktop\projet-locker-BTS-CIEL-29-05-2026\étudiant n°2(Tom)\LockerRaspberry\LockerRaspberry\bin\Debug\net10.0-windows\LockerRaspberry.pdb
+C:\Users\Administrateur\Desktop\projet-locker-BTS-CIEL-29-05-2026\étudiant n°2(Tom)\LockerRaspberry\LockerRaspberry\obj\Debug\net10.0-windows\LockerRaspberry.MainForm.resources
+C:\Users\Administrateur\Desktop\projet-locker-BTS-CIEL-29-05-2026\étudiant n°2(Tom)\LockerRaspberry\LockerRaspberry\obj\Debug\net10.0-windows\LockerRaspberry.csproj.GenerateResource.cache
+C:\Users\Administrateur\Desktop\projet-locker-BTS-CIEL-29-05-2026\étudiant n°2(Tom)\LockerRaspberry\LockerRaspberry\obj\Debug\net10.0-windows\LockerRaspberry.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Administrateur\Desktop\projet-locker-BTS-CIEL-29-05-2026\étudiant n°2(Tom)\LockerRaspberry\LockerRaspberry\obj\Debug\net10.0-windows\LockerRaspberry.AssemblyInfoInputs.cache
+C:\Users\Administrateur\Desktop\projet-locker-BTS-CIEL-29-05-2026\étudiant n°2(Tom)\LockerRaspberry\LockerRaspberry\obj\Debug\net10.0-windows\LockerRaspberry.AssemblyInfo.cs
+C:\Users\Administrateur\Desktop\projet-locker-BTS-CIEL-29-05-2026\étudiant n°2(Tom)\LockerRaspberry\LockerRaspberry\obj\Debug\net10.0-windows\LockerRaspberry.csproj.CoreCompileInputs.cache
+C:\Users\Administrateur\Desktop\projet-locker-BTS-CIEL-29-05-2026\étudiant n°2(Tom)\LockerRaspberry\LockerRaspberry\obj\Debug\net10.0-windows\LockerRaspberry.dll
+C:\Users\Administrateur\Desktop\projet-locker-BTS-CIEL-29-05-2026\étudiant n°2(Tom)\LockerRaspberry\LockerRaspberry\obj\Debug\net10.0-windows\refint\LockerRaspberry.dll
+C:\Users\Administrateur\Desktop\projet-locker-BTS-CIEL-29-05-2026\étudiant n°2(Tom)\LockerRaspberry\LockerRaspberry\obj\Debug\net10.0-windows\LockerRaspberry.pdb
+C:\Users\Administrateur\Desktop\projet-locker-BTS-CIEL-29-05-2026\étudiant n°2(Tom)\LockerRaspberry\LockerRaspberry\obj\Debug\net10.0-windows\LockerRaspberry.genruntimeconfig.cache
+C:\Users\Administrateur\Desktop\projet-locker-BTS-CIEL-29-05-2026\étudiant n°2(Tom)\LockerRaspberry\LockerRaspberry\obj\Debug\net10.0-windows\ref\LockerRaspberry.dll
