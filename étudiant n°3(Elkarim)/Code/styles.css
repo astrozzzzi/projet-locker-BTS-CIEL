@@ -1,0 +1,317 @@
+.button {
+  display: block;
+  width: 100%;
+  padding: 11px;
+  border-radius: 8px;
+  background: #007bff;
+  color: white;
+  border: none;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 4px;
+  margin-bottom: 10px;
+}
+
+/* ---------------- GLOBAL ---------------- */
+
+body {
+  margin: 0;
+  padding: 0;
+  background: #f4f6f9;
+  font-family: Arial, sans-serif;
+}
+
+/* ---------------- PAGE ---------------- */
+
+.page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px 16px;
+}
+
+/* ---------------- CONTAINER ---------------- */
+
+.container {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  padding: 32px 28px;
+  width: 100%;
+  max-width: 420px;
+}
+
+/* ---------------- TITRES ---------------- */
+
+.title {
+  font-size: 36px;
+  font-weight: bold;
+  color: #1a1a2e;
+  margin-bottom: 6px;
+  text-align: center;
+}
+
+.subtitle {
+  color: #888;
+  font-size: 14px;
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.pageTitle {
+  font-size: 22px;
+  font-weight: bold;
+  color: #1a1a2e;
+  margin-bottom: 20px;
+}
+
+/* ---------------- LABEL ---------------- */
+
+.label {
+  display: block;
+  font-size: 13px;
+  font-weight: bold;
+  color: #555;
+  margin-bottom: 5px;
+  margin-top: 4px;
+}
+
+/* ---------------- INPUT ---------------- */
+
+.input {
+  display: block;
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  font-size: 14px;
+  margin-bottom: 14px;
+  box-sizing: border-box;
+  background: #fafafa;
+}
+
+.input:focus {
+  outline: none;
+  border-color: #007bff;
+}
+
+/* ---------------- INPUT ERREUR ---------------- */
+
+.inputErreur {
+  display: block;
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #dc3545;
+  font-size: 14px;
+  margin-bottom: 4px;
+  box-sizing: border-box;
+  background: #fff8f8;
+}
+
+.msgErreur {
+  color: #dc3545;
+  font-size: 12px;
+  margin-bottom: 10px;
+  margin-top: 0;
+}
+
+/* ---------------- BUTTON ---------------- */
+
+.button {
+  display: block;
+  width: 100%;
+  padding: 11px;
+  border-radius: 8px;
+  background: #007bff;
+  color: white;
+  border: none;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 4px;
+  margin-bottom: 10px;
+  transition: 0.2s;
+}
+
+.button:hover {
+  background: #0069d9;
+}
+
+/* ---------------- BUTTON OUTLINE ---------------- */
+
+.buttonOutline {
+  display: block;
+  width: 100%;
+  padding: 11px;
+  border-radius: 8px;
+  background: white;
+  color: #007bff;
+  border: 1px solid #007bff;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 4px;
+  margin-bottom: 10px;
+  transition: 0.2s;
+}
+
+.buttonOutline:hover {
+  background: #f0f7ff;
+}
+
+/* ---------------- BUTTON RED ---------------- */
+
+.buttonRed {
+  display: block;
+  width: 100%;
+  padding: 11px;
+  border-radius: 8px;
+  background: #dc3545;
+  color: white;
+  border: none;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 4px;
+  margin-bottom: 10px;
+}
+
+.buttonRed:hover {
+  background: #c82333;
+}
+
+/* ---------------- BUTTON GREEN ---------------- */
+
+.buttonGreen {
+  display: block;
+  width: 100%;
+  padding: 11px;
+  border-radius: 8px;
+  background: #28a745;
+  color: white;
+  border: none;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 4px;
+  margin-bottom: 10px;
+}
+
+.buttonGreen:hover {
+  background: #218838;
+}
+
+/* ---------------- BUTTON DISABLED ---------------- */
+
+.buttonDisabled {
+  display: block;
+  width: 100%;
+  padding: 11px;
+  border-radius: 8px;
+  background: #ccc;
+  color: white;
+  border: none;
+  font-size: 14px;
+  cursor: not-allowed;
+  margin-top: 4px;
+  margin-bottom: 10px;
+}
+
+/* ---------------- BACK BUTTON ---------------- */
+
+.backBtn {
+  background: none;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: 13px;
+  cursor: pointer;
+  color: #666;
+  margin-bottom: 18px;
+}
+
+.backBtn:hover {
+  background: #f5f5f5;
+}
+
+/* ---------------- CARD ---------------- */
+
+.card {
+  background: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 10px;
+  padding: 16px 18px;
+  margin-top: 16px;
+  line-height: 1.8;
+}
+
+/* ---------------- ALERT ---------------- */
+
+.alertRed {
+  background: #fff0f0;
+  border: 1px solid #f5c2c7;
+  color: #842029;
+  border-radius: 8px;
+  padding: 12px 14px;
+  margin-top: 14px;
+  font-size: 14px;
+}
+
+/* ---------------- FLEX ---------------- */
+
+.row {
+  display: flex;
+  gap: 10px;
+}
+
+.halfField {
+  flex: 1;
+}
+
+.thirdField {
+  flex: 1;
+}
+
+/* ---------------- 2 COLONNES ---------------- */
+
+.twoColumns {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.formColumn {
+  flex: 1 1 300px;
+}
+
+.mapColumn {
+  flex: 1 1 340px;
+}
+
+/* ---------------- LOCKER ---------------- */
+
+.lockerChoisi {
+  background: #e8f4fd;
+  border: 1px solid #bee3f8;
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 13px;
+  color: #0c5460;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.lockerVide {
+  background: #f8f9fa;
+  border: 2px dashed #ddd;
+  border-radius: 8px;
+  padding: 12px 14px;
+  font-size: 13px;
+  color: #999;
+  text-align: center;
+}
