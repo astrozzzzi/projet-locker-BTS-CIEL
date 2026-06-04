@@ -77,6 +77,12 @@ CREATE TABLE IF NOT EXISTS `bddLocker`.`TailleCasier` (
 )
 ENGINE = InnoDB;
 
+INSERT INTO `bddLocker`.`TailleCasier`
+(`nom`, `longueur`, `largeur`, `hauteur`)
+VALUES
+('Petit', 20, 20, 20),
+('Moyen', 40, 30, 30),
+('Grand', 60, 40, 40);
 
 -- -----------------------------------------------------
 -- Table `bddLocker`.`Casier`
@@ -108,7 +114,6 @@ CREATE TABLE IF NOT EXISTS `bddLocker`.`Casier` (
 
 )
 ENGINE = InnoDB;
-
 
 -- -----------------------------------------------------
 -- Table `bddLocker`.`Colis`
