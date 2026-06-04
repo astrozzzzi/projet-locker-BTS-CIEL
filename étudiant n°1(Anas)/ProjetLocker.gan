@@ -1,114 +1,108 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project name="Projet Locker" company="Cité scolaire Mauriac-Desgranges" webLink="" view-date="2025-10-01" view-index="0" gantt-divider-location="400" resource-divider-location="300" version="3.0.3000" locale="fr_FR">
-    <description>Projet Locker - BTS Cybersécurité IR - Session 2026</description>
-    <view zooming-state="default:7" id="gantt-chart">
-        <field id="0" name="Tâche" width="200" order="0"/>
-        <field id="1" name="Date début" width="75" order="1"/>
-        <field id="2" name="Durée" width="75" order="2"/>
-        <field id="3" name="Avancement" width="75" order="3"/>
+<?xml version="1.0" encoding="UTF-8"?><project name="Projet Locker" company="Cité scolaire Mauriac-Desgranges" webLink="" view-date="2025-09-01" view-index="0" gantt-divider-location="400" resource-divider-location="300" version="3.3.3300" locale="fr_FR">
+    <description><![CDATA[Projet Locker - BTS Cybersécurité IR - Session 2026]]></description>
+    <view zooming-state="default:8" id="gantt-chart">
+        <field id="tpd3" name="Nom" width="228" order="0"/>
+        <field id="tpd4" name="Date de début" width="85" order="1"/>
+        <field id="tpd5" name="Date de fin" width="86" order="2"/>
+        <field id="tpd15" name="Notes" width="20" order="3"/>
+        <option id="filter.completedTasks" value="false"/>
+        <option id="filter.dueTodayTasks" value="false"/>
+        <option id="filter.overdueTasks" value="false"/>
+        <option id="filter.inProgressTodayTasks" value="false"/>
     </view>
     <view id="resource-table">
         <field id="0" name="Nom" width="210" order="0"/>
-        <field id="1" name="Rôle" width="86" order="1"/>
+        <field id="1" name="Rôle par défaut" width="86" order="1"/>
     </view>
+    <!-- -->
     <calendars>
         <day-types>
             <day-type id="0"/>
             <day-type id="1"/>
             <default-week id="1" name="default" sun="1" mon="0" tue="0" wed="0" thu="0" fri="0" sat="1"/>
             <only-show-weekends value="false"/>
-            <overridden-day-types/>
+            <overriden-day-types/>
             <days/>
         </day-types>
     </calendars>
     <tasks empty-milestones="true">
-        <!-- ═══════════════════════════════════════════════════════════ -->
-        <!-- TÂCHES COMMUNES -->
-        <!-- ═══════════════════════════════════════════════════════════ -->
-        <task id="1" name="Tâches communes" color="#1E2761" shape="0" meeting="false" start="2025-10-01" duration="175" complete="60" expand="true">
-            <task id="2" name="Installation &amp; mise en place" color="#1E2761" shape="0" meeting="false" start="2025-10-01" duration="10" complete="100" expand="true"/>
-            <task id="3" name="Création espace GitHub" color="#1E2761" shape="0" meeting="false" start="2025-10-01" duration="5" complete="100" expand="true"/>
-            <task id="4" name="Planification du projet (Gantt)" color="#1E2761" shape="0" meeting="false" start="2025-10-06" duration="5" complete="100" expand="true"/>
-            <task id="5" name="Élaboration du cahier de recette" color="#1E2761" shape="0" meeting="false" start="2025-10-13" duration="15" complete="100" expand="true"/>
-            <task id="6" name="Analyse RGPD" color="#1E2761" shape="0" meeting="false" start="2025-10-13" duration="10" complete="100" expand="true"/>
-            <task id="7" name="Tests de l'ensemble du système" color="#059669" shape="0" meeting="false" start="2026-05-04" duration="20" complete="20" expand="true"/>
-            <task id="8" name="Revue de projet &amp; soutenance" color="#059669" shape="0" meeting="true" start="2026-06-01" duration="0" complete="0" expand="true"/>
+        <taskproperties>
+            <taskproperty id="tpd0" name="type" type="default" valuetype="icon"/>
+            <taskproperty id="tpd1" name="priority" type="default" valuetype="icon"/>
+            <taskproperty id="tpd2" name="info" type="default" valuetype="icon"/>
+            <taskproperty id="tpd3" name="name" type="default" valuetype="text"/>
+            <taskproperty id="tpd4" name="begindate" type="default" valuetype="date"/>
+            <taskproperty id="tpd5" name="enddate" type="default" valuetype="date"/>
+            <taskproperty id="tpd6" name="duration" type="default" valuetype="int"/>
+            <taskproperty id="tpd7" name="completion" type="default" valuetype="int"/>
+            <taskproperty id="tpd8" name="coordinator" type="default" valuetype="text"/>
+            <taskproperty id="tpd9" name="predecessorsr" type="default" valuetype="text"/>
+        </taskproperties>
+        <task id="1" uid="294bcad546cc43788e86851897fb539a" name="Tâches communes" color="#1e2761" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="2025-10-01" duration="173" complete="75" expand="true">
+            <task id="2" uid="ff6ea90620fb406a88ff532b5139afec" name="Installation &amp; mise en place" color="#1e2761" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="2025-10-01" duration="10" complete="100" expand="true"/>
+            <task id="3" uid="63988349227d489395bd037294371d35" name="Création espace GitHub" color="#1e2761" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="2025-10-01" duration="5" complete="100" expand="true"/>
+            <task id="4" uid="cdd2a85635ab4fd7a42b2392b10db394" name="Planification du projet (Gantt)" color="#1e2761" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="2025-10-06" duration="5" complete="100" expand="true"/>
+            <task id="5" uid="b5fb46401bd744ca9ba15ad0836e4682" name="Élaboration du cahier de recette" color="#1e2761" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="2025-10-13" duration="15" complete="100" expand="true"/>
+            <task id="6" uid="eeb7334b1abd488c93dbb2892059623d" name="Analyse RGPD" color="#1e2761" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="2025-10-13" duration="10" complete="100" expand="true"/>
+            <task id="7" uid="edbda5fff12c42f68aa2a19b4c08352b" name="Tests de l'ensemble du système" color="#059669" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="2026-05-04" duration="20" complete="20" expand="true"/>
+            <task id="8" uid="d5e5fd0ec2bc45728b4ac79612b1cc3b" name="Revue de projet &amp; soutenance" color="#059669" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="true" start="2026-06-01" duration="0" complete="0" expand="true"/>
         </task>
-
-        <!-- ═══════════════════════════════════════════════════════════ -->
-        <!-- ÉTUDIANT E1 - BDD + API + Arduino SMS -->
-        <!-- ═══════════════════════════════════════════════════════════ -->
-        <task id="10" name="E1 – Base de données &amp; API &amp; Arduino SMS" color="#0891B2" shape="0" meeting="false" start="2025-10-01" duration="175" complete="65" expand="true">
-            <task id="11" name="Analyse &amp; modélisation BDD (MCD/MLD)" color="#0891B2" shape="0" meeting="false" start="2025-10-01" duration="20" complete="100" expand="true"/>
-            <task id="12" name="Création schéma MySQL (bddLocker)" color="#0891B2" shape="0" meeting="false" start="2025-10-27" duration="20" complete="100" expand="true"/>
-            <task id="13" name="Sécurisation données &amp; conformité RGPD" color="#0891B2" shape="0" meeting="false" start="2025-11-17" duration="15" complete="100" expand="true"/>
-            <task id="14" name="Développement API PHP" color="#0891B2" shape="0" meeting="false" start="2026-01-05" duration="45" complete="100" expand="true"/>
-            <task id="15" name="Tests unitaires BDD &amp; API" color="#059669" shape="0" meeting="false" start="2026-03-02" duration="15" complete="100" expand="true"/>
-            <task id="16" name="Programmation Arduino (shields SIM + Ethernet)" color="#D97706" shape="0" meeting="false" start="2026-03-16" duration="30" complete="40" expand="true"/>
-            <task id="17" name="Tests unitaires Arduino SMS" color="#059669" shape="0" meeting="false" start="2026-04-20" duration="10" complete="20" expand="true"/>
-            <task id="18" name="Tests d'intégration API ↔ Arduino SMS" color="#059669" shape="0" meeting="false" start="2026-05-04" duration="15" complete="10" expand="true"/>
-            <task id="19" name="Documentation technique E1" color="#64748B" shape="0" meeting="false" start="2026-05-04" duration="20" complete="30" expand="true"/>
+        <task id="40" uid="db3cc6a316e6409391c34c27d71b0d78" name="E3 – Site web" color="#dc2626" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="2025-10-01" duration="173" complete="78" expand="true">
+            <task id="41" uid="401b4388c9ab48a08b8a11351aca58fd" name="Conception diag site web" color="#dc2626" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="2025-10-01" duration="13" complete="100" thirdDate="2025-10-01" thirdDate-constraint="0" expand="true"/>
+            <task id="42" uid="dbb8fecbc3664ba18008e3343341e477" name="Création comptes clients &amp; authentification 2FA" color="#dc2626" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="2025-10-20" duration="25" complete="100" expand="true"/>
+            <task id="43" uid="dc173e2990eb47eba91770421a82fe4b" name="Création de colis (carte OpenStreetMap)" color="#dc2626" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="2025-11-17" duration="25" complete="100" expand="true"/>
+            <task id="44" uid="09ea49e71b2848cf98b6626942fa9207" name="Génération PDF étiquette (QR code)" color="#dc2626" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="2025-12-15" duration="20" complete="100" expand="true"/>
+            <task id="45" uid="4e43c557d4264317a413b2eb07860cff" name="Suivi de colis (sans connexion)" color="#dc2626" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="2026-01-12" duration="15" complete="90" expand="true"/>
+            <task id="46" uid="6d21d5d5e1114dce916a067a896db96a" name="Notifications mail &amp; SMS" color="#dc2626" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="2026-02-02" duration="20" complete="70" expand="true"/>
+            <task id="47" uid="e9921b8a390648d69474132e3f43cddc" name="Code OTP retrait colis" color="#dc2626" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="2026-02-23" duration="10" complete="60" expand="true"/>
+            <task id="48" uid="6a6e70e56c494275b02dce0ec04f2036" name="Tests unitaires site web" color="#059669" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="2026-03-09" duration="15" complete="70" expand="true"/>
+            <task id="49" uid="615ad9a5a7ba4849b421f8c64707332c" name="Tests d'intégration site ↔ API" color="#059669" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="2026-04-06" duration="15" complete="40" expand="true"/>
+            <task id="50" uid="71340924d2994ee09de8b1f7cd48d483" name="Documentation technique E3" color="#64748b" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="2026-05-04" duration="20" complete="30" expand="true"/>
         </task>
-
-        <!-- ═══════════════════════════════════════════════════════════ -->
-        <!-- ÉTUDIANT E2 - Locker (Raspberry Pi) -->
-        <!-- ═══════════════════════════════════════════════════════════ -->
-        <task id="20" name="E2 – Pilotage Locker (Raspberry Pi)" color="#7C3AED" shape="0" meeting="false" start="2025-10-01" duration="175" complete="55" expand="true">
-            <task id="21" name="Installation OS Raspberry Pi" color="#7C3AED" shape="0" meeting="false" start="2025-10-01" duration="5" complete="100" expand="true"/>
-            <task id="22" name="Conception IHM locker" color="#7C3AED" shape="0" meeting="false" start="2025-10-06" duration="20" complete="100" expand="true"/>
-            <task id="23" name="Pilotage électroaimants" color="#7C3AED" shape="0" meeting="false" start="2025-10-27" duration="25" complete="100" expand="true"/>
-            <task id="24" name="Lecture QR code / code-barres" color="#7C3AED" shape="0" meeting="false" start="2025-11-24" duration="20" complete="100" expand="true"/>
-            <task id="25" name="Connexion sans-fil livreur (WiFi/Bluetooth)" color="#7C3AED" shape="0" meeting="false" start="2025-12-15" duration="20" complete="80" expand="true"/>
-            <task id="26" name="Connexion à l'API" color="#7C3AED" shape="0" meeting="false" start="2026-01-12" duration="20" complete="80" expand="true"/>
-            <task id="27" name="Gestion retour colis (délai 7 jours)" color="#7C3AED" shape="0" meeting="false" start="2026-02-09" duration="15" complete="50" expand="true"/>
-            <task id="28" name="Tests unitaires locker" color="#059669" shape="0" meeting="false" start="2026-03-02" duration="15" complete="70" expand="true"/>
-            <task id="29" name="Tests d'intégration locker ↔ API" color="#059669" shape="0" meeting="false" start="2026-04-06" duration="15" complete="30" expand="true"/>
-            <task id="30" name="Documentation technique E2" color="#64748B" shape="0" meeting="false" start="2026-05-04" duration="20" complete="30" expand="true"/>
+        <task id="60" uid="adc7a2db1fda4aafbfb31e76df487569" name="E4 – Application mobile" color="#059669" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="2025-10-01" duration="173" complete="66" expand="false">
+            <task id="61" uid="1f32657ffe4b4a85bead53859b277451" name="Conception architecture appli mobile" color="#059669" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="2025-10-01" duration="15" complete="100" expand="true"/>
+            <task id="62" uid="debbb57867594b3098d7091cd8825985" name="Identification livreur (double authentification)" color="#059669" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="2025-10-20" duration="20" complete="100" expand="true"/>
+            <task id="63" uid="23b00f2903384d64ba7e280e8a6fce4e" name="Scan QR code / code-barres" color="#059669" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="2025-11-10" duration="20" complete="100" expand="true"/>
+            <task id="64" uid="2b99c535a6fd4debbcc720ae09a180fa" name="Connexion sans-fil au locker (WiFi/Bluetooth)" color="#059669" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="2025-12-01" duration="25" complete="80" expand="true"/>
+            <task id="65" uid="9fcb32a3ca354ba2a2992169b53d05bd" name="Protocole de communication locker ↔ appli" color="#059669" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="2025-12-29" duration="25" complete="60" expand="true"/>
+            <task id="66" uid="c9c30def992248bfaa3405302be3c399" name="Connexion à l'API" color="#059669" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="2026-01-26" duration="20" complete="60" expand="true"/>
+            <task id="67" uid="f7a4cc07b853436aa8147bb3c56a1d26" name="Tests unitaires appli mobile" color="#059669" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="2026-03-09" duration="15" complete="50" expand="true"/>
+            <task id="68" uid="dc526be063a24ca6a6c28c83be3e4959" name="Tests d'intégration appli ↔ locker ↔ API" color="#059669" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="2026-04-13" duration="15" complete="20" expand="true"/>
+            <task id="69" uid="3a21e709a8ff43b787c84533084f5f62" name="Documentation technique E4" color="#64748b" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="2026-05-04" duration="20" complete="20" expand="true"/>
         </task>
-
-        <!-- ═══════════════════════════════════════════════════════════ -->
-        <!-- ÉTUDIANT E3 - Site web -->
-        <!-- ═══════════════════════════════════════════════════════════ -->
-        <task id="40" name="E3 – Site web" color="#DC2626" shape="0" meeting="false" start="2025-10-01" duration="175" complete="60" expand="true">
-            <task id="41" name="Conception maquettes UI/UX" color="#DC2626" shape="0" meeting="false" start="2025-10-01" duration="15" complete="100" expand="true"/>
-            <task id="42" name="Création comptes clients &amp; authentification 2FA" color="#DC2626" shape="0" meeting="false" start="2025-10-20" duration="25" complete="100" expand="true"/>
-            <task id="43" name="Création de colis (carte OpenStreetMap)" color="#DC2626" shape="0" meeting="false" start="2025-11-17" duration="25" complete="100" expand="true"/>
-            <task id="44" name="Génération PDF étiquette (QR code)" color="#DC2626" shape="0" meeting="false" start="2025-12-15" duration="20" complete="100" expand="true"/>
-            <task id="45" name="Suivi de colis (sans connexion)" color="#DC2626" shape="0" meeting="false" start="2026-01-12" duration="15" complete="90" expand="true"/>
-            <task id="46" name="Notifications mail &amp; SMS" color="#DC2626" shape="0" meeting="false" start="2026-02-02" duration="20" complete="70" expand="true"/>
-            <task id="47" name="Code OTP retrait colis" color="#DC2626" shape="0" meeting="false" start="2026-02-23" duration="10" complete="60" expand="true"/>
-            <task id="48" name="Tests unitaires site web" color="#059669" shape="0" meeting="false" start="2026-03-09" duration="15" complete="70" expand="true"/>
-            <task id="49" name="Tests d'intégration site ↔ API" color="#059669" shape="0" meeting="false" start="2026-04-06" duration="15" complete="40" expand="true"/>
-            <task id="50" name="Documentation technique E3" color="#64748B" shape="0" meeting="false" start="2026-05-04" duration="20" complete="30" expand="true"/>
+        <task id="10" uid="59510326d57b41738d9ddd62bd8d4ffe" name="E1 – Base de données &amp; API &amp; Arduino SMS" color="#0891b2" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="2025-10-01" duration="173" complete="71" expand="false">
+            <task id="11" uid="cd868e8794d440cc97f11968f08e2458" name="Analyse &amp; modélisation BDD (MCD/MLD)" color="#0891b2" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="2025-10-01" duration="20" complete="100" expand="true"/>
+            <task id="12" uid="f872b092853a4c0b8d6b8953a13dafa5" name="Création schéma MySQL (bddLocker)" color="#0891b2" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="2025-10-27" duration="20" complete="100" expand="true"/>
+            <task id="13" uid="f7839b6f4d4047baa7433dbbf0df1a4a" name="Sécurisation données &amp; conformité RGPD" color="#0891b2" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="2025-11-17" duration="15" complete="100" expand="true"/>
+            <task id="14" uid="e6e63553dfbe4582882675f00da865fb" name="Développement API PHP" color="#0891b2" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="2026-01-05" duration="45" complete="100" expand="true"/>
+            <task id="15" uid="4219048b92e34754a50895490755e2bb" name="Tests unitaires BDD &amp; API" color="#059669" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="2026-03-02" duration="15" complete="100" expand="true"/>
+            <task id="16" uid="5bea55814cef48439435d0115502357a" name="Programmation Arduino (shields SIM + Ethernet)" color="#d97706" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="2026-03-16" duration="30" complete="40" expand="true"/>
+            <task id="17" uid="f0ab74b3d02844d2a28c71bfb30639a9" name="Tests unitaires Arduino SMS" color="#059669" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="2026-04-20" duration="10" complete="20" expand="true"/>
+            <task id="18" uid="ec7982b313234c109e965d9d96da8c66" name="Tests d'intégration API ↔ Arduino SMS" color="#059669" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="2026-05-04" duration="15" complete="10" expand="true"/>
+            <task id="19" uid="a060c2781c014ae4bd2b2b95dafaedb8" name="Documentation technique E1" color="#64748b" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="2026-05-04" duration="20" complete="30" expand="true"/>
         </task>
-
-        <!-- ═══════════════════════════════════════════════════════════ -->
-        <!-- ÉTUDIANT E4 - Application mobile -->
-        <!-- ═══════════════════════════════════════════════════════════ -->
-        <task id="60" name="E4 – Application mobile" color="#059669" shape="0" meeting="false" start="2025-10-01" duration="175" complete="55" expand="true">
-            <task id="61" name="Conception architecture appli mobile" color="#059669" shape="0" meeting="false" start="2025-10-01" duration="15" complete="100" expand="true"/>
-            <task id="62" name="Identification livreur (double authentification)" color="#059669" shape="0" meeting="false" start="2025-10-20" duration="20" complete="100" expand="true"/>
-            <task id="63" name="Scan QR code / code-barres" color="#059669" shape="0" meeting="false" start="2025-11-10" duration="20" complete="100" expand="true"/>
-            <task id="64" name="Connexion sans-fil au locker (WiFi/Bluetooth)" color="#059669" shape="0" meeting="false" start="2025-12-01" duration="25" complete="80" expand="true"/>
-            <task id="65" name="Protocole de communication locker ↔ appli" color="#059669" shape="0" meeting="false" start="2025-12-29" duration="25" complete="60" expand="true"/>
-            <task id="66" name="Connexion à l'API" color="#059669" shape="0" meeting="false" start="2026-01-26" duration="20" complete="60" expand="true"/>
-            <task id="67" name="Tests unitaires appli mobile" color="#059669" shape="0" meeting="false" start="2026-03-09" duration="15" complete="50" expand="true"/>
-            <task id="68" name="Tests d'intégration appli ↔ locker ↔ API" color="#059669" shape="0" meeting="false" start="2026-04-13" duration="15" complete="20" expand="true"/>
-            <task id="69" name="Documentation technique E4" color="#64748B" shape="0" meeting="false" start="2026-05-04" duration="20" complete="20" expand="true"/>
+        <task id="20" uid="d0e58d213b5147c7af6d1662fe48bf90" name="E2 – Pilotage Locker (Raspberry Pi)" color="#7c3aed" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="2025-10-01" duration="173" complete="74" expand="false">
+            <task id="21" uid="6ddb5120461a4744b18febe25a2d27dd" name="Installation OS Raspberry Pi" color="#7c3aed" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="2025-10-01" duration="5" complete="100" expand="true"/>
+            <task id="22" uid="389f17db8f434c6cb0a1eb84d17d1c3e" name="Conception IHM locker" color="#7c3aed" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="2025-10-06" duration="20" complete="100" expand="true"/>
+            <task id="23" uid="fff30435a9b747b89ad54c30773dee80" name="Pilotage électroaimants" color="#7c3aed" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="2025-10-27" duration="25" complete="100" expand="true"/>
+            <task id="24" uid="c812c6037b4740d8a645a2c143e8b6ef" name="Lecture QR code / code-barres" color="#7c3aed" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="2025-11-24" duration="20" complete="100" expand="true"/>
+            <task id="25" uid="07c2e7e4d2c743ccb4c5948f93de4bf8" name="Connexion sans-fil livreur (WiFi/Bluetooth)" color="#7c3aed" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="2025-12-15" duration="20" complete="80" expand="true"/>
+            <task id="26" uid="ec44c32f0d254258ada510b088f3bebf" name="Connexion à l'API" color="#7c3aed" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="2026-01-12" duration="20" complete="80" expand="true"/>
+            <task id="27" uid="dc8ae350f0c0451db5bb43112c736d34" name="Gestion retour colis (délai 7 jours)" color="#7c3aed" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="2026-02-09" duration="15" complete="50" expand="true"/>
+            <task id="28" uid="7340123e7413469ab38e31ee54d05e22" name="Tests unitaires locker" color="#059669" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="2026-03-02" duration="15" complete="70" expand="true"/>
+            <task id="29" uid="a22f4ae89f47426f8549bc7aecb805a0" name="Tests d'intégration locker ↔ API" color="#059669" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="2026-04-06" duration="15" complete="30" expand="true"/>
+            <task id="30" uid="e0396c6d7457435f9a4a370de47ef08c" name="Documentation technique E2" color="#64748b" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="2026-05-04" duration="20" complete="30" expand="true"/>
         </task>
     </tasks>
-
     <resources>
         <resource id="1" name="Étudiant E1 – BDD / API / Arduino" function="SoftwareDevelopment:2" contacts="" phone=""/>
         <resource id="2" name="Étudiant E2 – Locker / Raspberry Pi" function="SoftwareDevelopment:2" contacts="" phone=""/>
         <resource id="3" name="Étudiant E3 – Site web" function="SoftwareDevelopment:2" contacts="" phone=""/>
         <resource id="4" name="Étudiant E4 – Application mobile" function="SoftwareDevelopment:2" contacts="" phone=""/>
-        <resource id="5" name="Ludovic Guerin (tuteur)" function="SoftwareDevelopment:1" contacts="" phone=""/>
-        <resource id="6" name="Jacques Kaczorek (tuteur)" function="SoftwareDevelopment:1" contacts="" phone=""/>
+        <resource id="5" name="Ludovic Guerin (tuteur)" function="Default:0" contacts="" phone=""/>
+        <resource id="6" name="Jacques Kaczorek (tuteur)" function="Default:0" contacts="" phone=""/>
     </resources>
-
     <allocations>
-        <!-- E1 -->
         <allocation task-id="11" resource-id="1" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
         <allocation task-id="12" resource-id="1" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
         <allocation task-id="13" resource-id="1" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
@@ -118,7 +112,8 @@
         <allocation task-id="17" resource-id="1" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
         <allocation task-id="18" resource-id="1" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
         <allocation task-id="19" resource-id="1" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
-        <!-- E2 -->
+        <allocation task-id="2" resource-id="1" function="SoftwareDevelopment:2" responsible="true" load="25.0"/>
+        <allocation task-id="7" resource-id="1" function="SoftwareDevelopment:2" responsible="true" load="25.0"/>
         <allocation task-id="21" resource-id="2" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
         <allocation task-id="22" resource-id="2" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
         <allocation task-id="23" resource-id="2" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
@@ -129,7 +124,8 @@
         <allocation task-id="28" resource-id="2" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
         <allocation task-id="29" resource-id="2" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
         <allocation task-id="30" resource-id="2" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
-        <!-- E3 -->
+        <allocation task-id="2" resource-id="2" function="SoftwareDevelopment:2" responsible="false" load="25.0"/>
+        <allocation task-id="7" resource-id="2" function="SoftwareDevelopment:2" responsible="false" load="25.0"/>
         <allocation task-id="41" resource-id="3" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
         <allocation task-id="42" resource-id="3" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
         <allocation task-id="43" resource-id="3" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
@@ -140,7 +136,8 @@
         <allocation task-id="48" resource-id="3" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
         <allocation task-id="49" resource-id="3" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
         <allocation task-id="50" resource-id="3" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
-        <!-- E4 -->
+        <allocation task-id="2" resource-id="3" function="SoftwareDevelopment:2" responsible="false" load="25.0"/>
+        <allocation task-id="7" resource-id="3" function="SoftwareDevelopment:2" responsible="false" load="25.0"/>
         <allocation task-id="61" resource-id="4" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
         <allocation task-id="62" resource-id="4" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
         <allocation task-id="63" resource-id="4" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
@@ -150,19 +147,10 @@
         <allocation task-id="67" resource-id="4" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
         <allocation task-id="68" resource-id="4" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
         <allocation task-id="69" resource-id="4" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
-        <!-- Tâches communes -->
-        <allocation task-id="2" resource-id="1" function="SoftwareDevelopment:2" responsible="true" load="25.0"/>
-        <allocation task-id="2" resource-id="2" function="SoftwareDevelopment:2" responsible="false" load="25.0"/>
-        <allocation task-id="2" resource-id="3" function="SoftwareDevelopment:2" responsible="false" load="25.0"/>
         <allocation task-id="2" resource-id="4" function="SoftwareDevelopment:2" responsible="false" load="25.0"/>
-        <allocation task-id="7" resource-id="1" function="SoftwareDevelopment:2" responsible="true" load="25.0"/>
-        <allocation task-id="7" resource-id="2" function="SoftwareDevelopment:2" responsible="false" load="25.0"/>
-        <allocation task-id="7" resource-id="3" function="SoftwareDevelopment:2" responsible="false" load="25.0"/>
         <allocation task-id="7" resource-id="4" function="SoftwareDevelopment:2" responsible="false" load="25.0"/>
     </allocations>
-
     <vacations/>
     <previous/>
     <roles roleset-name="Default"/>
-    <roles roleset-name="SoftwareDevelopment"/>
 </project>
