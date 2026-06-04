@@ -1,19 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Text.Json.Serialization;
 
 namespace LockerRaspberry.Models
 {
     public class Colis
     {
-        public int idColis { get; set; }
-        public int num_colis { get; set; }
-        public float longueur { get; set; }
-        public float largeur { get; set; }
-        public float hauteur { get; set; }
-        public int Livreur_idLivreur { get; set; }
-        public int Casier_idCasier { get; set; }
-        public int Clients_idExpediteur { get; set; }
-        public int Clients_idDestinataire { get; set; }
+        [JsonPropertyName("idColis")]
+        public int IdColis { get; set; }
+
+        [JsonPropertyName("num_colis")]
+        public string? NumColis { get; set; }
+
+        [JsonPropertyName("Casier_idCasier")]
+        public int? CasierIdCasier { get; set; }
     }
 }

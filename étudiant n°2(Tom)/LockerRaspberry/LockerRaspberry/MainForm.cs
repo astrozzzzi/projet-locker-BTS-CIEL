@@ -1,7 +1,8 @@
 using System;
 using System.Windows.Forms;
-using LockerRaspberry.Services;
 using LockerRaspberry.Controllers;
+using LockerRaspberry.Models;
+using LockerRaspberry.Services;
 
 namespace LockerRaspberry
 {
@@ -22,38 +23,16 @@ namespace LockerRaspberry
             AjouterLog("Application Locker Raspberry démarrée.");
         }
 
-        private async void btnDeposerColis_Click(object sender, EventArgs e)
+        private async void btnTesterApi_Click(object sender, EventArgs e)
         {
-            string numeroColis = txtCode.Text.Trim();
+            AjouterLog("Test de connexion à l'API...");
 
-            if (numeroColis == "")
-            {
-                AjouterLog("Veuillez saisir un numéro de colis.");
-                return;
-            }
+            string resultat = await apiService.TesterApiAsync();
 
-            AjouterLog($"Recherche du colis {numeroColis}...");
-
-            string reponse = await apiService.TrackColisAsync(numeroColis);
-
-            if (string.IsNullOrWhiteSpace(reponse))
-            {
-                AjouterLog("Erreur API.");
-                return;
-            }
-
-            AjouterLog("Colis trouvé.");
-
-            // TEMPORAIRE
-            // À remplacer plus tard par la lecture du vrai Casier_idCasier
-            casierActuel = 1;
-
-            lockerController.OuvrirCasier(casierActuel);
-
-            AjouterLog($"Casier {casierActuel} ouvert pour dépôt.");
+            AjouterLog(resultat);
         }
 
-        private async void btnRetirerColis_Click(object sender, EventArgs e)
+        private async void btnValiderCode_Click(object sender, EventArgs e)
         {
             string numeroColis = txtCode.Text.Trim();
 
@@ -65,22 +44,22 @@ namespace LockerRaspberry
 
             AjouterLog($"Recherche du colis {numeroColis}...");
 
-            string reponse = await apiService.TrackColisAsync(numeroColis);
+            Colis? colis = await apiService.RechercherColisAsync(numeroColis);
 
-            if (string.IsNullOrWhiteSpace(reponse))
+            if (colis == null)
             {
-                AjouterLog("Erreur API.");
+                AjouterLog("Colis introuvable ou erreur API.");
                 return;
             }
 
-            AjouterLog("Colis trouvé.");
+            casierActuel = RecupererCasier(colis);
 
-            // TEMPORAIRE
-            casierActuel = 1;
+            AjouterLog($"Colis trouvé : {colis.NumColis}");
+            AjouterLog($"Casier associé : {casierActuel}");
 
             lockerController.OuvrirCasier(casierActuel);
 
-            AjouterLog($"Casier {casierActuel} ouvert pour retrait.");
+            AjouterLog($"Casier {casierActuel} ouvert.");
         }
 
         private void btnFermerCasier_Click(object sender, EventArgs e)
@@ -98,10 +77,20 @@ namespace LockerRaspberry
             casierActuel = -1;
         }
 
+        private int RecupererCasier(Colis colis)
+        {
+            if (colis.CasierIdCasier.HasValue)
+            {
+                return colis.CasierIdCasier.Value;
+            }
+
+            AjouterLog("Aucun casier associé par l'API. Casier 1 utilisé pour test.");
+            return 1;
+        }
+
         private void AjouterLog(string message)
         {
-            richTextBoxLogs.AppendText(
-                $"[{DateTime.Now:HH:mm:ss}] {message}\n");
+            richTextBoxLogs.AppendText($"[{DateTime.Now:HH:mm:ss}] {message}\n");
         }
     }
 }

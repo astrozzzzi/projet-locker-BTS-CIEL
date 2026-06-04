@@ -34,6 +34,7 @@
             txtCode = new TextBox();
             labelConnexion = new Label();
             label3 = new Label();
+            btnTesterApi = new Button();
             SuspendLayout();
             // 
             // richTextBoxLogs
@@ -87,11 +88,22 @@
             label3.TabIndex = 7;
             label3.Text = "Code colis :";
             // 
+            // btnTesterApi
+            // 
+            btnTesterApi.Location = new Point(636, 153);
+            btnTesterApi.Name = "btnTesterApi";
+            btnTesterApi.Size = new Size(75, 23);
+            btnTesterApi.TabIndex = 8;
+            btnTesterApi.Text = "Tester API";
+            btnTesterApi.UseVisualStyleBackColor = true;
+            btnTesterApi.Click += btnTesterApi_Click;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 427);
+            Controls.Add(btnTesterApi);
             Controls.Add(label3);
             Controls.Add(labelConnexion);
             Controls.Add(txtCode);
@@ -112,5 +124,6 @@
         private TextBox txtCode;
         private Label labelConnexion;
         private Label label3;
+        private Button btnTesterApi;
     }
 }
