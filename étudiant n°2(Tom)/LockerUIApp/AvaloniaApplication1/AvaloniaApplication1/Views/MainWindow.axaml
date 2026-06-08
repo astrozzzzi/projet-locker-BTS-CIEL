@@ -1,0 +1,56 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="AvaloniaLockerApp.Views.MainWindow"
+        Title="Locker Raspberry"
+        Width="520"
+        Height="650"
+        CanResize="False">
+
+    <StackPanel Margin="25" Spacing="12">
+
+        <TextBlock Text="LOCKER"
+                   FontSize="32"
+                   FontWeight="Bold"
+                   HorizontalAlignment="Center"/>
+
+        <TextBlock Text="Application de gestion des casiers"
+                   FontSize="16"
+                   HorizontalAlignment="Center"
+                   Margin="0,0,0,20"/>
+
+        <TextBlock Text="Numéro de colis :"
+                   FontSize="18"/>
+
+        <TextBox x:Name="txtCode"
+                 PlaceholderText="Saisir le numéro du colis"
+                 FontSize="18"
+                 Height="45"/>
+
+        <Button x:Name="btnValiderCode"
+                Content="Valider / Ouvrir le casier"
+                Height="45"
+                FontSize="16"/>
+
+        <Button x:Name="btnFermerCasier"
+                Content="Fermer le casier"
+                Height="45"
+                FontSize="16"/>
+
+        <Button x:Name="btnTesterApi"
+                Content="Tester la connexion API"
+                Height="45"
+                FontSize="16"/>
+
+        <TextBlock Text="Journaux d'événements :"
+                   FontSize="18"
+                   Margin="0,15,0,0"/>
+
+        <TextBox x:Name="txtLogs"
+                 Height="270"
+                 AcceptsReturn="True"
+                 TextWrapping="Wrap"
+                 IsReadOnly="True"
+                 FontSize="14"/>
+
+    </StackPanel>
+</Window>
