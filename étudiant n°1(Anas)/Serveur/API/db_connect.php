@@ -6,13 +6,12 @@ $password = "jesuisgentil42";
 $dbname = "bddLocker";
 $port = 3307;
 
-$conn = mysqli_connect($host, $user, $password, $dbname, $port);
+$conn = mysqli_connect($host, $user, $password, $dbname);
 
-if (!$conn)
-{
+if (!$conn) {
     die(json_encode([
         "success" => false,
-        "message" => "Erreur connexion BDD : " . mysqli_connect_error()
+        "message" => "Erreur connexion DB : " . mysqli_connect_error()
     ]));
 }
 

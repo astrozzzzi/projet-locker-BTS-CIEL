@@ -1,198 +1,161 @@
 <?php
 
-include("db_connect.php");
-
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Headers: Content-Type");
-header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE");
+header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
+header("Content-Type: application/json");
 
-$request_method = $_SERVER["REQUEST_METHOD"];
+include("db_connect.php");
 
-// ===================== GET ALL =====================
-function getColis()
-{
-    global $conn;
-
-    $query = "
-
-    SELECT
-
-    Colis.*,
-
-    Clients.nom AS nomDestinataire,
-    Clients.prenom AS prenomDestinataire,
-
-    Locker.adresse,
-
-    Casier.num_casier
-
-    FROM Colis
-
-    JOIN Clients
-    ON Colis.Clients_idDestinataire = Clients.idClients
-
-    JOIN Casier
-    ON Colis.Casier_idCasier = Casier.idCasier
-
-    JOIN Locker
-    ON Casier.Locker_idLocker = Locker.idLocker
-
-    ";
-
-    $response = [];
-
-    $result = mysqli_query($conn, $query);
-
-    while($row = mysqli_fetch_assoc($result))
-    {
-        $response[] = $row;
-    }
-
-    echo json_encode($response);
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    http_response_code(200);
+    exit();
 }
 
-// ===================== GET ONE =====================
-function getOneColis($id)
+$data = json_decode(file_get_contents("php://input"), true);
+$method = $_SERVER["REQUEST_METHOD"];
+
+
+// ================= ADD COLIS =================
+function addColis($data)
 {
     global $conn;
 
-    $query = "
-    SELECT *
-    FROM Colis
-    WHERE num_colis='$id'
-    LIMIT 1
-    ";
-
-    $result = mysqli_query($conn, $query);
-
-    $response = mysqli_fetch_assoc($result);
-
-    echo json_encode($response);
-}
-
-// ===================== ADD =====================
-function addColis()
-{
-    global $conn;
-
-    $data = json_decode(file_get_contents("php://input"), true);
-
-    $num = $data["num_colis"];
+    $numero = $data["num_colis"];
     $longueur = $data["longueur"];
     $largeur = $data["largeur"];
     $hauteur = $data["hauteur"];
-
-    $casier = $data["Casier_idCasier"];
-
+    $destinataire = $data["destinataire"];
     $expediteur = $data["Clients_idExpediteur"];
-    $destinataire = $data["Clients_idDestinataire"];
-
-    // livreur dispo
-    $livreurQuery = "
-    SELECT *
-    FROM Livreur
-    WHERE disponibilite = 1
-    LIMIT 1
-    ";
-
-    $livreurResult = mysqli_query($conn, $livreurQuery);
-
-    $livreur = mysqli_fetch_assoc($livreurResult);
-
-    if(!$livreur)
-    {
-        echo json_encode([
-            "status" => 0,
-            "message" => "Aucun livreur disponible"
-        ]);
-
-        return;
-    }
-
-    $idLivreur = $livreur["idLivreur"];
-
-    // Génère ID colis
-    $idQuery = "SELECT MAX(idColis) as maxId FROM Colis";
-
-    $idResult = mysqli_query($conn, $idQuery);
-
-    $row = mysqli_fetch_assoc($idResult);
-
-    $newId = $row["maxId"] + 1;
 
     $query = "
-
     INSERT INTO Colis
     (
-        idColis,
         num_colis,
         longueur,
         largeur,
         hauteur,
-        Livreur_idLivreur,
-        Casier_idCasier,
-        Clients_idExpediteur,
-        Clients_idDestinataire
+        destinataire,
+        Clients_idExpediteur
     )
-
     VALUES
     (
-        '$newId',
-        '$num',
+        '$numero',
         '$longueur',
         '$largeur',
         '$hauteur',
-        '$idLivreur',
-        '$casier',
-        '$expediteur',
-        '$destinataire'
+        '$destinataire',
+        '$expediteur'
     )
-
     ";
 
     if(mysqli_query($conn, $query))
     {
         echo json_encode([
-            "status" => 1,
+            "success" => true,
             "message" => "Colis créé"
         ]);
     }
     else
     {
         echo json_encode([
-            "status" => 0,
+            "success" => false,
             "message" => mysqli_error($conn)
         ]);
     }
 }
 
-// ===================== ROUTER =====================
-switch($request_method)
+
+// ================= TRACK =================
+function trackColis($numero)
 {
-    case 'GET':
+    global $conn;
 
-        if(!empty($_GET["id"]))
-        {
-            getOneColis($_GET["id"]);
-        }
-        else
-        {
-            getColis();
-        }
+    $query = "
+    SELECT *
+    FROM Colis
+    WHERE num_colis='$numero'
+    LIMIT 1
+    ";
 
-        break;
+    $result = mysqli_query($conn, $query);
 
-    case 'POST':
+    if($row = mysqli_fetch_assoc($result))
+    {
+        echo json_encode($row);
+    }
+    else
+    {
+        echo json_encode([
+            "success" => false
+        ]);
+    }
+}
 
-        addColis();
 
-        break;
+// ================= USER COLIS =================
+function userColis($id)
+{
+    global $conn;
 
-    default:
+    $query = "
+    SELECT *
+    FROM Colis
+    WHERE Clients_idExpediteur='$id'
+    ";
 
-        header("HTTP/1.0 405 Method Not Allowed");
+    $result = mysqli_query($conn, $query);
 
-        break;
+    $colis = [];
+
+    while($row = mysqli_fetch_assoc($result))
+    {
+        $colis[] = $row;
+    }
+
+    echo json_encode($colis);
+}
+
+
+// ================= ALL COLIS =================
+function allColis()
+{
+    global $conn;
+
+    $query = "SELECT * FROM Colis";
+
+    $result = mysqli_query($conn, $query);
+
+    $colis = [];
+
+    while($row = mysqli_fetch_assoc($result))
+    {
+        $colis[] = $row;
+    }
+
+    echo json_encode($colis);
+}
+
+
+// ================= ROUTER =================
+if($method === "GET")
+{
+    if(isset($_GET["track"]))
+    {
+        trackColis($_GET["track"]);
+    }
+    else if(isset($_GET["user"]))
+    {
+        userColis($_GET["user"]);
+    }
+    else
+    {
+        allColis();
+    }
+}
+else if($method === "POST")
+{
+    addColis($data);
 }
 
 ?>
