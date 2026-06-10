@@ -28,32 +28,6 @@ function addColis($data)
     $destinataire = $data["destinataire"];
     $expediteur = $data["Clients_idExpediteur"];
 
-    // =========================
-    // Cherche un livreur libre
-    // =========================
-    $livreurQuery = "
-    SELECT idLivreur
-    FROM Livreur
-    WHERE disponibilite = 1
-    LIMIT 1
-    ";
-
-    $livreurResult = mysqli_query($conn, $livreurQuery);
-
-    if(!$livreur = mysqli_fetch_assoc($livreurResult))
-    {
-        echo json_encode([
-            "success" => false,
-            "message" => "Aucun livreur disponible"
-        ]);
-        return;
-    }
-
-    $idLivreur = $livreur["idLivreur"];
-
-    // =========================
-    // Création colis
-    // =========================
     $query = "
     INSERT INTO Colis
     (
@@ -62,8 +36,7 @@ function addColis($data)
         largeur,
         hauteur,
         destinataire,
-        Clients_idExpediteur,
-        Livreur_idLivreur
+        Clients_idExpediteur
     )
     VALUES
     (
@@ -72,27 +45,15 @@ function addColis($data)
         '$largeur',
         '$hauteur',
         '$destinataire',
-        '$expediteur',
-        '$idLivreur'
+        '$expediteur'
     )
     ";
 
     if(mysqli_query($conn, $query))
     {
-        // =========================
-        // Rend le livreur occupé
-        // =========================
-        $updateLivreur = "
-        UPDATE Livreur
-        SET disponibilite = 0
-        WHERE idLivreur = '$idLivreur'
-        ";
-
-        mysqli_query($conn, $updateLivreur);
-
         echo json_encode([
             "success" => true,
-            "message" => "Colis créé et livreur attribué"
+            "message" => "Colis créé"
         ]);
     }
     else
