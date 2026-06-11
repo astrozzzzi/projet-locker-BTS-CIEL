@@ -28,7 +28,7 @@ namespace AvaloniaLockerApp.Services
 
                 if (response.IsSuccessStatusCode)
                 {
-                    return "API accessible : " + contenu;
+                    return "API accessible";
                 }
 
                 return "Erreur API : " + response.StatusCode;
@@ -39,11 +39,14 @@ namespace AvaloniaLockerApp.Services
             }
         }
 
-        public async Task<Colis?> RechercherColisAsync(string numeroColis)
+        public async Task<Colis?> RechercherColisAsync(string code)
         {
             try
             {
-                string url = baseUrl + "colis.php?track=" + numeroColis;
+                // Pour l’instant, on utilise track.
+                // Plus tard, si le groupe utilise un code de retrait,
+                // il faudra peut-être modifier le paramètre côté API.
+                string url = baseUrl + "colis.php?track=" + code;
 
                 string json = await httpClient.GetStringAsync(url);
 

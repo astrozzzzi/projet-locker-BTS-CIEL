@@ -2,55 +2,123 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         x:Class="AvaloniaLockerApp.Views.MainWindow"
         Title="Locker Raspberry"
-        Width="520"
-        Height="650"
-        CanResize="False">
+        Width="800"
+        Height="600"
+        MinWidth="700"
+        MinHeight="480"
+        CanResize="True">
 
-    <StackPanel Margin="25" Spacing="12">
+    <ScrollViewer>
+        <StackPanel Margin="25" Spacing="7">
 
-        <TextBlock Text="LOCKER"
-                   FontSize="32"
-                   FontWeight="Bold"
-                   HorizontalAlignment="Center"/>
+            <TextBlock Text="LOCKER"
+                       FontSize="28"
+                       FontWeight="Bold"
+                       HorizontalAlignment="Center"/>
 
-        <TextBlock Text="Application de gestion des casiers"
-                   FontSize="16"
-                   HorizontalAlignment="Center"
-                   Margin="0,0,0,20"/>
+            <TextBlock Text="Application de gestion des casiers"
+                       FontSize="14"
+                       HorizontalAlignment="Center"
+                       Margin="0,0,0,8"/>
 
-        <TextBlock Text="Numéro de colis :"
-                   FontSize="18"/>
+            <TextBlock Text="Code de retrait :"
+                       FontSize="16"/>
 
-        <TextBox x:Name="txtCode"
-                 PlaceholderText="Saisir le numéro du colis"
-                 FontSize="18"
-                 Height="45"/>
+            <TextBox x:Name="txtCode"
+                     Watermark="Saisir le code"
+                     FontSize="17"
+                     Height="38"/>
 
-        <Button x:Name="btnValiderCode"
-                Content="Valider / Ouvrir le casier"
-                Height="45"
-                FontSize="16"/>
+            <TextBlock Text="Casier associé :"
+                       FontSize="16"/>
 
-        <Button x:Name="btnFermerCasier"
-                Content="Fermer le casier"
-                Height="45"
-                FontSize="16"/>
+            <TextBlock x:Name="txtCasier"
+                       Text="Aucun casier sélectionné"
+                       FontSize="17"
+                       FontWeight="Bold"
+                       Margin="0,0,0,4"/>
 
-        <Button x:Name="btnTesterApi"
-                Content="Tester la connexion API"
-                Height="45"
-                FontSize="16"/>
+            <Button x:Name="btnValiderCode"
+                    Content="Valider / Déverrouiller"
+                    Height="38"
+                    FontSize="15"/>
 
-        <TextBlock Text="Journaux d'événements :"
-                   FontSize="18"
-                   Margin="0,15,0,0"/>
+            <Button x:Name="btnFermerCasier"
+                    Content="Verrouiller le casier"
+                    Height="38"
+                    FontSize="15"/>
 
-        <TextBox x:Name="txtLogs"
-                 Height="270"
-                 AcceptsReturn="True"
-                 TextWrapping="Wrap"
-                 IsReadOnly="True"
-                 FontSize="14"/>
+            <Button x:Name="btnTesterApi"
+                    Content="Tester API"
+                    Height="36"
+                    FontSize="15"/>
 
-    </StackPanel>
+            <TextBlock Text="Accès maintenance :"
+                       FontSize="16"
+                       Margin="0,6,0,0"/>
+
+            <StackPanel Orientation="Horizontal" Spacing="8">
+                <TextBox x:Name="txtMotDePasseMaintenance"
+                         Watermark="Code maintenance"
+                         PasswordChar="*"
+                         Width="220"
+                         Height="35"/>
+
+                <Button x:Name="btnConnexionMaintenance"
+                        Content="Connexion"
+                        Width="120"
+                        Height="35"/>
+
+                <Button x:Name="btnDeconnexionMaintenance"
+                        Content="Déconnexion"
+                        Width="120"
+                        Height="35"
+                        IsVisible="False"/>
+            </StackPanel>
+
+            <StackPanel x:Name="panelMaintenance"
+                        IsVisible="False"
+                        Spacing="6">
+
+                <TextBlock Text="Mode maintenance : test manuel des casiers"
+                           FontSize="15"
+                           FontWeight="Bold"/>
+
+                <StackPanel Orientation="Horizontal" Spacing="8">
+
+                    <ComboBox x:Name="comboCasierTest"
+                              SelectedIndex="0"
+                              Width="130"
+                              Height="35">
+                        <ComboBoxItem Content="Casier 1"/>
+                        <ComboBoxItem Content="Casier 2"/>
+                        <ComboBoxItem Content="Casier 3"/>
+                        <ComboBoxItem Content="Casier 4"/>
+                    </ComboBox>
+
+                    <Button x:Name="btnTestDeverrouiller"
+                            Content="Tester déverrouillage"
+                            Width="190"
+                            Height="35"/>
+
+                    <Button x:Name="btnTestVerrouiller"
+                            Content="Tester verrouillage"
+                            Width="170"
+                            Height="35"/>
+                </StackPanel>
+            </StackPanel>
+
+            <TextBlock Text="Logs :"
+                       FontSize="16"
+                       Margin="0,4,0,0"/>
+
+            <TextBox x:Name="txtLogs"
+                     Height="90"
+                     AcceptsReturn="True"
+                     TextWrapping="Wrap"
+                     IsReadOnly="True"
+                     FontSize="13"/>
+
+        </StackPanel>
+    </ScrollViewer>
 </Window>

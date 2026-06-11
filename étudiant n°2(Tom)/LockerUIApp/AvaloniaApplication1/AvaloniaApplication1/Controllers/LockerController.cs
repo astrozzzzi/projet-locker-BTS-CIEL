@@ -8,19 +8,19 @@ namespace AvaloniaLockerApp.Controllers
     public class LockerController : IDisposable
     {
         private GpioController? gpioController;
-        private readonly bool gpioDisponible;
+        private bool gpioDisponible;
 
-        // GPIO utilisés pour chaque casier
-        // À adapter selon ton câblage réel
+        // Branchement réel sur le Grove Base HAT
         private readonly Dictionary<int, int> pinsCasiers = new Dictionary<int, int>
         {
-            { 1, 17 }, // Casier 1 -> GPIO 17
-            { 2, 27 }, // Casier 2 -> GPIO 27
-            { 3, 22 }, // Casier 3 -> GPIO 22
-            { 4, 23 }  // Casier 4 -> GPIO 23
+            { 1, 5 },   // Casier 1 -> D5
+            { 2, 12 },  // Casier 2 -> D12
+            { 3, 16 },  // Casier 3 -> D16
+            { 4, 15 }   // Casier 4 -> UART RX
         };
 
-        // À modifier après test si ton module fonctionne à l'envers
+        // Si le fonctionnement est inversé pendant les tests,
+        // il suffit d'inverser ces deux valeurs.
         private readonly PinValue aimantActive = PinValue.High;
         private readonly PinValue aimantDesactive = PinValue.Low;
 
@@ -30,14 +30,22 @@ namespace AvaloniaLockerApp.Controllers
 
             if (gpioDisponible)
             {
-                gpioController = new GpioController();
-
-                foreach (int pin in pinsCasiers.Values)
+                try
                 {
-                    gpioController.OpenPin(pin, PinMode.Output);
+                    gpioController = new GpioController();
 
-                    // Au démarrage, on verrouille les casiers
-                    gpioController.Write(pin, aimantActive);
+                    foreach (int pin in pinsCasiers.Values)
+                    {
+                        gpioController.OpenPin(pin, PinMode.Output);
+
+                        // Au démarrage, les casiers sont verrouillés
+                        gpioController.Write(pin, aimantActive);
+                    }
+                }
+                catch
+                {
+                    gpioDisponible = false;
+                    gpioController = null;
                 }
             }
         }
@@ -46,40 +54,40 @@ namespace AvaloniaLockerApp.Controllers
         {
             if (!pinsCasiers.ContainsKey(idCasier))
             {
-                return $"Erreur : casier {idCasier} inconnu.";
+                return $"Casier {idCasier} inconnu";
             }
 
             int pin = pinsCasiers[idCasier];
 
             if (!gpioDisponible || gpioController == null)
             {
-                return $"Simulation : désactivation de l'électroaimant du casier {idCasier} sur GPIO {pin}.";
+                return $"Simulation : casier n°{idCasier} déverrouillé";
             }
 
-            // Ouvrir = libérer la porte = désactiver l'électroaimant
+            // Ouvrir = déverrouiller = désactiver l'électroaimant
             gpioController.Write(pin, aimantDesactive);
 
-            return $"Casier {idCasier} déverrouillé via GPIO {pin}.";
+            return $"Casier n°{idCasier} déverrouillé";
         }
 
         public string FermerCasier(int idCasier)
         {
             if (!pinsCasiers.ContainsKey(idCasier))
             {
-                return $"Erreur : casier {idCasier} inconnu.";
+                return $"Casier {idCasier} inconnu";
             }
 
             int pin = pinsCasiers[idCasier];
 
             if (!gpioDisponible || gpioController == null)
             {
-                return $"Simulation : activation de l'électroaimant du casier {idCasier} sur GPIO {pin}.";
+                return $"Simulation : casier n°{idCasier} verrouillé";
             }
 
-            // Fermer = verrouiller la porte = activer l'électroaimant
+            // Fermer = verrouiller = activer l'électroaimant
             gpioController.Write(pin, aimantActive);
 
-            return $"Casier {idCasier} verrouillé via GPIO {pin}.";
+            return $"Casier n°{idCasier} verrouillé";
         }
 
         public void Dispose()
