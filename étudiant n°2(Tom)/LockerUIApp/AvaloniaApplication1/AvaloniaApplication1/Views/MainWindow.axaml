@@ -3,59 +3,63 @@
         x:Class="AvaloniaLockerApp.Views.MainWindow"
         Title="Locker Raspberry"
         Width="800"
-        Height="600"
-        MinWidth="700"
-        MinHeight="480"
-        CanResize="True">
+        Height="550"
+        CanResize="False">
 
     <ScrollViewer>
-        <StackPanel Margin="25" Spacing="7">
+        <StackPanel Margin="25" Spacing="8">
 
             <TextBlock Text="LOCKER"
-                       FontSize="28"
+                       FontSize="30"
                        FontWeight="Bold"
                        HorizontalAlignment="Center"/>
 
             <TextBlock Text="Application de gestion des casiers"
-                       FontSize="14"
+                       FontSize="15"
                        HorizontalAlignment="Center"
-                       Margin="0,0,0,8"/>
+                       Margin="0,0,0,10"/>
 
+            <!-- Partie fonctionnement normal -->
             <TextBlock Text="Code de retrait :"
-                       FontSize="16"/>
+                       FontSize="17"/>
 
             <TextBox x:Name="txtCode"
                      Watermark="Saisir le code"
-                     FontSize="17"
-                     Height="38"/>
+                     FontSize="18"
+                     Height="40"/>
 
             <TextBlock Text="Casier associé :"
-                       FontSize="16"/>
+                       FontSize="17"/>
 
             <TextBlock x:Name="txtCasier"
                        Text="Aucun casier sélectionné"
-                       FontSize="17"
+                       FontSize="20"
                        FontWeight="Bold"
-                       Margin="0,0,0,4"/>
+                       Margin="0,0,0,5"/>
+
+            <TextBlock Text="État du casier :"
+                       FontSize="17"/>
+
+            <TextBlock x:Name="txtEtatCasier"
+                       Text="En attente d'un code"
+                       FontSize="20"
+                       FontWeight="Bold"
+                       Margin="0,0,0,10"/>
 
             <Button x:Name="btnValiderCode"
                     Content="Valider / Déverrouiller"
-                    Height="38"
-                    FontSize="15"/>
+                    Height="42"
+                    FontSize="16"/>
 
             <Button x:Name="btnFermerCasier"
                     Content="Verrouiller le casier"
-                    Height="38"
-                    FontSize="15"/>
+                    Height="42"
+                    FontSize="16"/>
 
-            <Button x:Name="btnTesterApi"
-                    Content="Tester API"
-                    Height="36"
-                    FontSize="15"/>
-
+            <!-- Accès maintenance -->
             <TextBlock Text="Accès maintenance :"
-                       FontSize="16"
-                       Margin="0,6,0,0"/>
+                       FontSize="17"
+                       Margin="0,10,0,0"/>
 
             <StackPanel Orientation="Horizontal" Spacing="8">
                 <TextBox x:Name="txtMotDePasseMaintenance"
@@ -76,13 +80,15 @@
                         IsVisible="False"/>
             </StackPanel>
 
+            <!-- Partie maintenance cachée au démarrage -->
             <StackPanel x:Name="panelMaintenance"
                         IsVisible="False"
-                        Spacing="6">
+                        Spacing="8">
 
                 <TextBlock Text="Mode maintenance : test manuel des casiers"
-                           FontSize="15"
-                           FontWeight="Bold"/>
+                           FontSize="16"
+                           FontWeight="Bold"
+                           Margin="0,8,0,0"/>
 
                 <StackPanel Orientation="Horizontal" Spacing="8">
 
@@ -106,18 +112,19 @@
                             Width="170"
                             Height="35"/>
                 </StackPanel>
+
+                <!-- Logs visibles seulement en maintenance -->
+                <TextBlock Text="Logs maintenance :"
+                           FontSize="16"
+                           Margin="0,6,0,0"/>
+
+                <TextBox x:Name="txtLogs"
+                         Height="120"
+                         AcceptsReturn="True"
+                         TextWrapping="Wrap"
+                         IsReadOnly="True"
+                         FontSize="13"/>
             </StackPanel>
-
-            <TextBlock Text="Logs :"
-                       FontSize="16"
-                       Margin="0,4,0,0"/>
-
-            <TextBox x:Name="txtLogs"
-                     Height="90"
-                     AcceptsReturn="True"
-                     TextWrapping="Wrap"
-                     IsReadOnly="True"
-                     FontSize="13"/>
 
         </StackPanel>
     </ScrollViewer>

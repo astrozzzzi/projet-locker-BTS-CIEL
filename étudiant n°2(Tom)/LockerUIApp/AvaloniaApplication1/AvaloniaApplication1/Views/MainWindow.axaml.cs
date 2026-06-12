@@ -30,7 +30,6 @@ namespace AvaloniaLockerApp.Views
 
             btnValiderCode.Click += BtnValiderCode_Click;
             btnFermerCasier.Click += BtnFermerCasier_Click;
-            btnTesterApi.Click += BtnTesterApi_Click;
 
             btnConnexionMaintenance.Click += BtnConnexionMaintenance_Click;
             btnDeconnexionMaintenance.Click += BtnDeconnexionMaintenance_Click;
@@ -38,21 +37,8 @@ namespace AvaloniaLockerApp.Views
             btnTestDeverrouiller.Click += BtnTestDeverrouiller_Click;
             btnTestVerrouiller.Click += BtnTestVerrouiller_Click;
 
+            MettreAJourEtat("En attente d'un code");
             AjouterLog("Application démarrée");
-        }
-
-        private async void BtnTesterApi_Click(object? sender, RoutedEventArgs e)
-        {
-            string resultat = await apiService.TesterApiAsync();
-
-            if (resultat.StartsWith("API accessible"))
-            {
-                AjouterLog("API accessible");
-            }
-            else
-            {
-                AjouterLog("Erreur API");
-            }
         }
 
         private async void BtnValiderCode_Click(object? sender, RoutedEventArgs e)
@@ -61,28 +47,36 @@ namespace AvaloniaLockerApp.Views
 
             if (code == "")
             {
-                AjouterLog("Veuillez saisir un code");
                 txtCasier.Text = "Aucun casier sélectionné";
+                MettreAJourEtat("Veuillez saisir un code");
+                AjouterLog("Code vide");
                 return;
             }
+
+            txtCasier.Text = "Aucun casier sélectionné";
+            MettreAJourEtat("Vérification du code...");
+            AjouterLog("Vérification du code");
 
             Colis? colis = await apiService.RechercherColisAsync(code);
 
             if (colis == null)
             {
-                AjouterLog("Code invalide");
                 txtCasier.Text = "Aucun casier sélectionné";
+                MettreAJourEtat("Code invalide ou API inaccessible");
+                AjouterLog("Code invalide ou API inaccessible");
                 return;
             }
 
             casierActuel = RecupererCasier(colis);
 
             txtCasier.Text = $"Casier n°{casierActuel}";
+            MettreAJourEtat($"Casier n°{casierActuel} sélectionné");
 
-            AjouterLog("Code valide");
+            AjouterLog($"Code valide - casier n°{casierActuel}");
 
             string resultat = lockerController.OuvrirCasier(casierActuel);
 
+            MettreAJourEtat($"Casier n°{casierActuel} déverrouillé");
             AjouterLog(resultat);
         }
 
@@ -90,15 +84,19 @@ namespace AvaloniaLockerApp.Views
         {
             if (casierActuel == -1)
             {
+                txtCasier.Text = "Aucun casier sélectionné";
+                MettreAJourEtat("Aucun casier à verrouiller");
                 AjouterLog("Aucun casier ouvert");
                 return;
             }
 
             string resultat = lockerController.FermerCasier(casierActuel);
 
+            MettreAJourEtat($"Casier n°{casierActuel} verrouillé");
             AjouterLog(resultat);
 
             txtCasier.Text = "Aucun casier sélectionné";
+            txtCode.Text = "";
             casierActuel = -1;
         }
 
@@ -112,6 +110,7 @@ namespace AvaloniaLockerApp.Views
                 btnDeconnexionMaintenance.IsVisible = true;
                 txtMotDePasseMaintenance.Text = "";
 
+                MettreAJourEtat("Mode maintenance activé");
                 AjouterLog("Mode maintenance activé");
             }
             else
@@ -119,6 +118,7 @@ namespace AvaloniaLockerApp.Views
                 panelMaintenance.IsVisible = false;
                 btnDeconnexionMaintenance.IsVisible = false;
 
+                MettreAJourEtat("Code maintenance incorrect");
                 AjouterLog("Code maintenance incorrect");
             }
         }
@@ -129,6 +129,7 @@ namespace AvaloniaLockerApp.Views
             btnDeconnexionMaintenance.IsVisible = false;
             txtMotDePasseMaintenance.Text = "";
 
+            MettreAJourEtat("Mode maintenance désactivé");
             AjouterLog("Mode maintenance désactivé");
         }
 
@@ -143,9 +144,11 @@ namespace AvaloniaLockerApp.Views
 
             string resultat = lockerController.OuvrirCasier(idCasier);
 
+            casierActuel = idCasier;
             txtCasier.Text = $"Casier n°{idCasier}";
+            MettreAJourEtat($"Casier n°{idCasier} déverrouillé");
 
-            AjouterLog($"Test : casier n°{idCasier} déverrouillé");
+            AjouterLog($"Test : {resultat}");
         }
 
         private void BtnTestVerrouiller_Click(object? sender, RoutedEventArgs e)
@@ -155,8 +158,15 @@ namespace AvaloniaLockerApp.Views
             string resultat = lockerController.FermerCasier(idCasier);
 
             txtCasier.Text = $"Casier n°{idCasier}";
+            MettreAJourEtat($"Casier n°{idCasier} verrouillé");
 
-            AjouterLog($"Test : casier n°{idCasier} verrouillé");
+            AjouterLog($"Test : {resultat}");
+
+            if (casierActuel == idCasier)
+            {
+                casierActuel = -1;
+                txtCasier.Text = "Aucun casier sélectionné";
+            }
         }
 
         private int RecupererCasier(Colis colis)
@@ -170,11 +180,18 @@ namespace AvaloniaLockerApp.Views
             return 1;
         }
 
+        private void MettreAJourEtat(string message)
+        {
+            txtEtatCasier.Text = message;
+        }
+
         private void AjouterLog(string message)
         {
-            lignesLogs.Add(message);
+            string ligne = $"[{DateTime.Now:dd/MM/yyyy HH:mm:ss}] {message}";
 
-            if (lignesLogs.Count > 6)
+            lignesLogs.Add(ligne);
+
+            if (lignesLogs.Count > 8)
             {
                 lignesLogs.RemoveAt(0);
             }

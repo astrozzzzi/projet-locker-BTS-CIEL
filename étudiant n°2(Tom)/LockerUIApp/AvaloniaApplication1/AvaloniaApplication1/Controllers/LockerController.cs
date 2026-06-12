@@ -19,8 +19,7 @@ namespace AvaloniaLockerApp.Controllers
             { 4, 15 }   // Casier 4 -> UART RX
         };
 
-        // Si le fonctionnement est inversé pendant les tests,
-        // il suffit d'inverser ces deux valeurs.
+       
         private readonly PinValue aimantActive = PinValue.High;
         private readonly PinValue aimantDesactive = PinValue.Low;
 
